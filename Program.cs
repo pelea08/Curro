@@ -39,8 +39,7 @@ namespace Ejercicio4Networkin
             using (StreamReader sr = new StreamReader(ns))
             {
 
-                sw.WriteLine("Introduzca una palabra");
-                sw.Flush();
+               
                 while (finalizacion)
                 {
                     if (sr.ReadLine().Equals("getword"))
@@ -50,7 +49,7 @@ namespace Ejercicio4Networkin
                             int tamaño = conjuntoPalabras.Length;
                             Random r = new Random();
                             int numeroAleatorio = r.Next(0, tamaño);
-                            sw.WriteLine("Resultado de Getword: " + numeroAleatorio);
+                            sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
                             sw.Flush();
 
                         }

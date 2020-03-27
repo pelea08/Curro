@@ -1,0 +1,7 @@
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\bin\Debug\borrar.exe.config
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\bin\Debug\borrar.exe
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\bin\Debug\borrar.pdb
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\obj\Debug\borrar.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\obj\Debug\borrar.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\obj\Debug\borrar.exe
+C:\Users\User\source\repos\Ejercicio4Networkin\borrar\obj\Debug\borrar.pdb
