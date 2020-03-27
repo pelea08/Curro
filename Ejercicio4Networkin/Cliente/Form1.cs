@@ -19,7 +19,7 @@ namespace Cliente
         String labelAuxiliar;
         bool bandera = false;
         String palabraNueva;
-
+        String[] rayitas;
         public Form1()
         {
             InitializeComponent();
@@ -87,20 +87,30 @@ namespace Cliente
         //DIFRENCIAR MAYUSCULAS MINISCULAS
         private void Button2_Click(object sender, EventArgs e)
         {
-            String[] rayitas;
+
             if (!bandera)
             {
                 rayitas = labelAuxiliar.Split('-');
                 bandera = true;
+                label1.Text = "";
+
             }
             else
             {
-                rayitas = palabraNueva.Split('-');
+                //rayitas = palabraNueva.Split('-');
+                //label1.Text = "";
 
             }
             String letraTextbox = txtAdivinar.Text;
+
+            //hacer palabrasresolver en char recorrerlo letra a letra diciendo si es igual a letraTextbox ,
+            //guardar posiciones en int de array y asi con estas posiciones sabes donde poner esa letra determinada (letra que se repite)
+
+
             if (palabraReseolver.Contains(letraTextbox))
             {
+                label1.Text = "";
+
                 int posLetra = palabraReseolver.IndexOf(letraTextbox);
                 //[posLetra]
                 rayitas[posLetra] = letraTextbox;
@@ -108,23 +118,17 @@ namespace Cliente
                 label1.Text = "";
                 for (int i = 0; i < rayitas.Length; i++)
                 {
-                    label1.Text = "";
                     if (rayitas.Length - 1 == i)
                     {
                         palabraNueva += rayitas[i];
-                        label1.Text = "";
-
-
                     }
                     else
                     {
                         palabraNueva += rayitas[i] + "-";
-                        label1.Text = "";
-
                     }
                 }
                 label1.Text = palabraNueva;
-
+                palabraNueva = "";
             }
             else
             {
