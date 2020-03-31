@@ -39,25 +39,34 @@ namespace Ejercicio4Networkin
             using (StreamReader sr = new StreamReader(ns))
             {
 
-               
+
                 while (finalizacion)
                 {
-                    if (sr.ReadLine().Equals("getword"))
+                    try
                     {
-                        using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt")) {
-                            String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
-                            int tamaño = conjuntoPalabras.Length;
-                            Random r = new Random();
-                            int numeroAleatorio = r.Next(0, tamaño);
-                            sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
-                            sw.Flush();
+                        if (sr.ReadLine().Equals("getword"))
+                        {
+                            using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt"))
+                            {
+                                String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
+                                int tamaño = conjuntoPalabras.Length;
+                                Random r = new Random();
+                                int numeroAleatorio = r.Next(0, tamaño);
+                                sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
+                                sw.Flush();
 
+                            }
                         }
-
-
+                        else if (sr.ReadLine().Equals("getrecords"))
+                        {
+                        }
+                    }
+                    catch (IOException)
+                    {
 
                     }
-                   
+
+
 
 
 

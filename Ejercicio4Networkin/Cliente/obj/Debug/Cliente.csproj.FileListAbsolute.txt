@@ -8,3 +8,4 @@ C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.exe
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.pdb
+C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Form2.resources
