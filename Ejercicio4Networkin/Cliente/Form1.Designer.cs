@@ -36,7 +36,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.lblVdas = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRecords = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -111,13 +111,13 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
-            // textBox1
+            // txtRecords
             // 
-            this.textBox1.Location = new System.Drawing.Point(710, 316);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(224, 162);
-            this.textBox1.TabIndex = 7;
+            this.txtRecords.Location = new System.Drawing.Point(710, 316);
+            this.txtRecords.Multiline = true;
+            this.txtRecords.Name = "txtRecords";
+            this.txtRecords.Size = new System.Drawing.Size(224, 162);
+            this.txtRecords.TabIndex = 7;
             // 
             // button4
             // 
@@ -127,6 +127,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Conseguir Records";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // button5
             // 
@@ -171,7 +172,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtRecords);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.lblVdas);
             this.Controls.Add(this.button2);
@@ -195,7 +196,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lblVdas;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtRecords;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox2;

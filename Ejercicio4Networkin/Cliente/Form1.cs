@@ -24,6 +24,7 @@ namespace Cliente
         bool banderaVerificar = false;
         static bool banderaPuntos = false;
         int segundos = 0;
+        IPAddress ipp;
 
         public Form1()
         {
@@ -40,6 +41,24 @@ namespace Cliente
         {
             String texto = "getword";
             conectar(texto);
+
+            int tamañoPalabra = palabraReseolver.Length;
+            String separaciones = "__-";
+            String separacionesFinal = "__";
+            label1.Text = "";
+            for (int i = 0; i < tamañoPalabra; i++)
+            {
+                if (tamañoPalabra - 1 == i)
+                {
+                    label1.Text += separacionesFinal;
+                }
+                else
+                {
+                    label1.Text += separaciones;
+                }
+            }
+            labelAuxiliar = label1.Text;
+
             button2.Enabled = true;
             txtAdivinar.Enabled = true;
             button1.Enabled = false;
@@ -49,43 +68,15 @@ namespace Cliente
             IPEndPoint ie = new IPEndPoint(IPAddress.Loopback, 31416);
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ie);
+            ipp = ie.Address;
             using (NetworkStream ns = new NetworkStream(s))
             using (StreamReader sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
-
-
-                //while (true) {
-
+                //OJO WHILE
                 sw.WriteLine(texto);
                 sw.Flush();
                 palabraReseolver = sr.ReadLine();
-                int tamañoPalabra = palabraReseolver.Length;
-                String separaciones = "__-";
-                String separacionesFinal = "__";
-                label1.Text = "";
-                for (int i = 0; i < tamañoPalabra; i++)
-                {
-                    if (tamañoPalabra - 1 == i)
-                    {
-                        label1.Text += separacionesFinal;
-                    }
-                    else
-                    {
-                        label1.Text += separaciones;
-
-                    }
-
-                }
-                labelAuxiliar = label1.Text;
-
-
-
-                //}
-
-
-
-
             }
 
         }
@@ -164,26 +155,16 @@ namespace Cliente
 
                 }
             }
-
-
             this.Refresh();
-
-
-
-
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            //if (banderaVerificar)
-            //{
-
-
             Graphics g = e.Graphics;
 
             if (cont == 1)
             {
                 g.DrawLine(new Pen(Color.Red), 100, 150, 100, 100);
-                
+
 
             }
             else if (cont == 2)
@@ -205,24 +186,58 @@ namespace Cliente
                 g.DrawLine(new Pen(Color.Red), 150, 100, 150, 115);
                 g.DrawEllipse(new Pen(Color.Blue), 142, 115, 15, 15);
                 timer1.Stop();
+                grabarRecord(segundos, "peter", ipp);
+                //Introducir nombre
+                //MessageBox.Show("Introduzca su nombre", "TITULO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
             }
-            //switch (cont)
-            //{
 
-            //    case 1:
-            //        g.DrawLine(new Pen(Color.Red), 100, 150, 100, 100);
-            //        break;
-            //    case 2:
-            //        g.DrawLine(new Pen(Color.Red), 150, 100, 150, 115);
-            //        break;
-            //    case 3:
-            //        g.DrawEllipse(new Pen(Color.Blue), 142, 115, 15, 15);
-            //        break;
-            //}
+        }
 
+        private void grabarRecord(int tiempo, String nombre, IPAddress iPAddress)
+        {
+            //Me peta y no se porque
+            using (StreamReader sr = new StreamReader("C:/Users/User/Desktop/getrecords.txt"))
+            using (StreamWriter sw = new StreamWriter("C:/Users/User/Desktop/getrecords.txt", true))
 
+            {
+                String[] palabras = sr.ReadLine().Split(' ');
+                List<int> almacen = new List<int>();
+                for (int i = 0; i < palabras.Length; i++)
+                {
+                    //Añadimos solo numero de primera fila
+                    almacen.Add(Convert.ToInt32(palabras[i]));
+                    i = i + 2;
+                    if (i > palabras.Length)
+                    {
+                        break;
+                    }
+                }
+                if (almacen.Count < 10)
+                {
+                    //{
+                        sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
+                        sw.Flush();
+                    //}
+                }
+                else
+                {
+                    for (int i = 0; i < almacen.Count; i++)
+                    {
+                        if (almacen[i] > segundos) {
+                            //using (StreamWriter sw = new StreamWriter("C:/Users/User/Desktop/getrecords.txt", true))
+                            //{
+                                sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
+                                sw.Flush();
+                            //}
+                        }
+                    }
+                }
+            }
+            //Nombre 3 caracteres
+            //Maximo 10 recors
 
-            //}
 
         }
 
@@ -245,6 +260,12 @@ namespace Cliente
         private void Timer1_Tick(object sender, EventArgs e)
         {
             segundos++;
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            conectar("getrecords");
+            txtRecords.Text = "" + palabraReseolver;
         }
     }
 }

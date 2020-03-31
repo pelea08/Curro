@@ -14,6 +14,7 @@ namespace Ejercicio4Networkin
     {
         static bool bandera = true;
         static bool finalizacion = true;
+        static readonly object l = new object();
         static void Main(string[] args)
         {
             IPEndPoint ie = new IPEndPoint(IPAddress.Any, 31416);
@@ -39,39 +40,53 @@ namespace Ejercicio4Networkin
             using (StreamReader sr = new StreamReader(ns))
             {
 
-
+                String txt = sr.ReadLine();
                 while (finalizacion)
                 {
                     try
                     {
-                        if (sr.ReadLine().Equals("getword"))
-                        {
-                            using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt"))
-                            {
-                                String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
-                                int tamaño = conjuntoPalabras.Length;
-                                Random r = new Random();
-                                int numeroAleatorio = r.Next(0, tamaño);
-                                sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
-                                sw.Flush();
 
+                        if (txt.Equals("getword"))
+                        {
+                            lock (l)
+                            {
+                                //ruta del homepath de marras
+                                using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt"))
+                                {
+                                    String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
+                                    int tamaño = conjuntoPalabras.Length;
+                                    Random r = new Random();
+                                    int numeroAleatorio = r.Next(0, tamaño);
+                                    sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
+                                    sw.Flush();
+
+                                }
                             }
                         }
-                        else if (sr.ReadLine().Equals("getrecords"))
+                        else if (txt.Equals("getrecords"))
                         {
+                            lock (l)
+                            {
+                                using (StreamReader srr = new StreamReader("C:/Users/User/Desktop/getrecords.txt"))
+                                {
+                                    String[] texto = srr.ReadToEnd().Split('\n');
+                                    for (int i = 0; i < texto.Length; i++)
+                                    {
+                                        sw.WriteLine(texto[i] + "\n");
+                                        sw.Flush();
+                                    }
+                                  
+
+                                }
+                            }
+
                         }
                     }
                     catch (IOException)
                     {
 
                     }
-
-
-
-
-
-
-
+                    finalizacion = false;
 
                 }
 

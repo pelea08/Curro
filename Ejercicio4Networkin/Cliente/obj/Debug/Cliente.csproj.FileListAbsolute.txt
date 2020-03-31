@@ -9,3 +9,14 @@ C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.exe
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.pdb
 C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Form2.resources
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\bin\Debug\Cliente.exe.config
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\bin\Debug\Cliente.exe
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\bin\Debug\Cliente.pdb
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Form1.resources
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Form2.resources
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.exe
+C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.pdb

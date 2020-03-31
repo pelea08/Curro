@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,19 @@ namespace Cliente
                 {
 
                 }
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            using (StreamWriter añadir = new StreamWriter("C:/Users/User/Desktop/getword.txt", true)) {
+                if (textBox1.Text != null && textBox1.Text != "") {
+
+                    añadir.WriteLine(textBox1.Text);
+                    añadir.Flush();
+
+                }
+
             }
         }
     }
