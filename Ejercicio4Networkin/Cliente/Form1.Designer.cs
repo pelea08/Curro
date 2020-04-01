@@ -113,7 +113,7 @@
             // 
             // txtRecords
             // 
-            this.txtRecords.Location = new System.Drawing.Point(710, 316);
+            this.txtRecords.Location = new System.Drawing.Point(705, 151);
             this.txtRecords.Multiline = true;
             this.txtRecords.Name = "txtRecords";
             this.txtRecords.Size = new System.Drawing.Size(224, 162);
@@ -121,7 +121,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(710, 528);
+            this.button4.Location = new System.Drawing.Point(705, 363);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(224, 30);
             this.button4.TabIndex = 8;

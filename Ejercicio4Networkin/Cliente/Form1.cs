@@ -25,6 +25,7 @@ namespace Cliente
         static bool banderaPuntos = false;
         int segundos = 0;
         IPAddress ipp;
+        static readonly object l = new object();
 
         public Form1()
         {
@@ -179,7 +180,7 @@ namespace Cliente
                 g.DrawLine(new Pen(Color.Red), 100, 100, 150, 100);
                 g.DrawLine(new Pen(Color.Red), 150, 100, 150, 115);
             }
-            else if (cont >= 4)
+            else if (cont == 4)
             {
                 g.DrawLine(new Pen(Color.Red), 100, 150, 100, 100);
                 g.DrawLine(new Pen(Color.Red), 100, 100, 150, 100);
@@ -197,9 +198,10 @@ namespace Cliente
 
         private void grabarRecord(int tiempo, String nombre, IPAddress iPAddress)
         {
-            //Me peta y no se porque
-            using (StreamReader sr = new StreamReader("C:/Users/User/Desktop/getrecords.txt"))
-            using (StreamWriter sw = new StreamWriter("C:/Users/User/Desktop/getrecords.txt", true))
+            //Tuve que informarme y usar lo de FileStream si no me petaba
+            FileStream f = new FileStream("C:/Users/User/Desktop/getrecords.txt", FileMode.Open);
+            using (StreamReader sr = new StreamReader(f))
+            using (StreamWriter sw = new StreamWriter(f))
 
             {
                 String[] palabras = sr.ReadLine().Split(' ');
@@ -217,20 +219,20 @@ namespace Cliente
                 if (almacen.Count < 10)
                 {
                     //{
-                        sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
-                        sw.Flush();
+                    sw.WriteLine(tiempo + " " + nombre + " " + iPAddress);
+                    sw.Flush();
                     //}
                 }
                 else
                 {
                     for (int i = 0; i < almacen.Count; i++)
                     {
-                        if (almacen[i] > segundos) {
-                            //using (StreamWriter sw = new StreamWriter("C:/Users/User/Desktop/getrecords.txt", true))
-                            //{
-                                sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
-                                sw.Flush();
-                            //}
+                        if (almacen[i] > segundos)
+                        {
+
+                            sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
+                            sw.Flush();
+                            break;
                         }
                     }
                 }
