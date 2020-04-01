@@ -41,6 +41,7 @@ namespace Ejercicio4Networkin
             {
 
                 String txt = sr.ReadLine();
+                String[] troceo = txt.Split(' ');
                 while (finalizacion)
                 {
                     try
@@ -75,10 +76,27 @@ namespace Ejercicio4Networkin
                                         sw.WriteLine(texto[i] + "\n");
                                         sw.Flush();
                                     }
-                                  
+
 
                                 }
                             }
+
+                        }
+                        else if (troceo[0].Equals("sendword"))
+                        {
+                            using (StreamWriter sww = new StreamWriter("C:/Users/User/Desktop/getword.txt", true))
+                            {
+                                sww.WriteLine(troceo[1]);
+                                sww.Flush();
+                            }
+
+
+                        }
+                        else if (troceo[0].Equals("sendrecord"))
+                        {
+
+                        }
+                        else if (troceo[0].Equals("closerver")) {
 
                         }
                     }
