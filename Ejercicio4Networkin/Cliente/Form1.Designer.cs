@@ -34,7 +34,6 @@
             this.txtAdivinar = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.lblVdas = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.txtRecords = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -92,15 +91,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
-            // lblVdas
-            // 
-            this.lblVdas.AutoSize = true;
-            this.lblVdas.Location = new System.Drawing.Point(468, 237);
-            this.lblVdas.Name = "lblVdas";
-            this.lblVdas.Size = new System.Drawing.Size(46, 17);
-            this.lblVdas.TabIndex = 5;
-            this.lblVdas.Text = "label3";
-            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(165, 376);
@@ -113,10 +103,9 @@
             // 
             // txtRecords
             // 
-            this.txtRecords.Location = new System.Drawing.Point(705, 151);
-            this.txtRecords.Multiline = true;
+            this.txtRecords.Location = new System.Drawing.Point(57, 122);
             this.txtRecords.Name = "txtRecords";
-            this.txtRecords.Size = new System.Drawing.Size(224, 162);
+            this.txtRecords.Size = new System.Drawing.Size(828, 22);
             this.txtRecords.TabIndex = 7;
             // 
             // button4
@@ -143,15 +132,15 @@
             // 
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(30, 502);
-            this.textBox2.MaxLength = 1;
+            this.textBox2.MaxLength = 4;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(134, 22);
+            this.textBox2.Size = new System.Drawing.Size(171, 22);
             this.textBox2.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 471);
+            this.label3.Location = new System.Drawing.Point(38, 472);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(144, 17);
             this.label3.TabIndex = 11;
@@ -174,7 +163,6 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.txtRecords);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.lblVdas);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAdivinar);
@@ -194,7 +182,6 @@
         private System.Windows.Forms.TextBox txtAdivinar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label lblVdas;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox txtRecords;
         private System.Windows.Forms.Button button4;

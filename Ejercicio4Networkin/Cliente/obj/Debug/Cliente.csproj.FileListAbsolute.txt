@@ -20,3 +20,4 @@ C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Clien
 C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.exe
 C:\Users\User\Documents\GitHub\Curro\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.pdb
+C:\Users\User\source\repos\Ejercicio4Networkin\Cliente\obj\Debug\Cliente.Form3.resources

@@ -23,9 +23,12 @@ namespace Cliente
         int cont;
         bool banderaVerificar = false;
         static bool banderaPuntos = false;
+        static String n;
         int segundos = 0;
         IPAddress ipp;
         static readonly object l = new object();
+
+        bool banderaRecord;
 
         public Form1()
         {
@@ -41,28 +44,36 @@ namespace Cliente
         private void Button1_Click(object sender, EventArgs e)
         {
             String texto = "getword";
-            conectar(texto);
-
-            int tamañoPalabra = palabraReseolver.Length;
-            String separaciones = "__-";
-            String separacionesFinal = "__";
-            label1.Text = "";
-            for (int i = 0; i < tamañoPalabra; i++)
+            Form3 f = new Form3();
+            //f.ShowDialog();
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                if (tamañoPalabra - 1 == i)
-                {
-                    label1.Text += separacionesFinal;
-                }
-                else
-                {
-                    label1.Text += separaciones;
-                }
-            }
-            labelAuxiliar = label1.Text;
+                n = f.nombre;
+                f.Dispose();
+                conectar(texto);
 
-            button2.Enabled = true;
-            txtAdivinar.Enabled = true;
-            button1.Enabled = false;
+                int tamañoPalabra = palabraReseolver.Length;
+                String separaciones = "__-";
+                String separacionesFinal = "__";
+                label1.Text = "";
+                for (int i = 0; i < tamañoPalabra; i++)
+                {
+                    if (tamañoPalabra - 1 == i)
+                    {
+                        label1.Text += separacionesFinal;
+                    }
+                    else
+                    {
+                        label1.Text += separaciones;
+                    }
+                }
+                labelAuxiliar = label1.Text;
+
+                button2.Enabled = true;
+                txtAdivinar.Enabled = true;
+                button1.Enabled = false;
+
+            }
         }
         private void conectar(string texto)
         {
@@ -70,16 +81,30 @@ namespace Cliente
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ie);
             ipp = ie.Address;
+            bool fin = true;
             using (NetworkStream ns = new NetworkStream(s))
             using (StreamReader sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
-                //OJO WHILE
-                sw.WriteLine(texto);
-                sw.Flush();
-                palabraReseolver = sr.ReadLine();
-            }
+                //OJO WHILE si lo pongo bucle infinito
 
+                //if (banderaRecord)
+                //{
+                //    while (fin) {
+                //        sw.WriteLine(texto);
+                //        sw.Flush();
+                //        palabraReseolver +="\n"+ sr.ReadLine();
+                //    }
+                //    fin = false;
+                //}
+                //else {
+                    sw.WriteLine(texto);
+                    sw.Flush();
+                    palabraReseolver = sr.ReadLine();
+                //}
+                
+
+            }
         }
         //DIFRENCIAR MAYUSCULAS MINISCULAS cualquier palabra que meta en el textbox la pasamos a minuscula
         private void Button2_Click(object sender, EventArgs e)
@@ -133,12 +158,9 @@ namespace Cliente
             }
             else
             {
-
-
                 for (int j = 0; j < almacenPosiciones.Count; j++)
                 {
                     rayitas[almacenPosiciones[j]] = letraTextbox;
-                    lblVdas.Text = "GG";
                     label1.Text = "";
                     for (int k = 0; k < rayitas.Length; k++)
                     {
@@ -153,7 +175,6 @@ namespace Cliente
                     }
                     label1.Text = palabraNueva;
                     palabraNueva = "";
-
                 }
             }
             this.Refresh();
@@ -161,12 +182,9 @@ namespace Cliente
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
             if (cont == 1)
             {
                 g.DrawLine(new Pen(Color.Red), 100, 150, 100, 100);
-
-
             }
             else if (cont == 2)
             {
@@ -187,13 +205,11 @@ namespace Cliente
                 g.DrawLine(new Pen(Color.Red), 150, 100, 150, 115);
                 g.DrawEllipse(new Pen(Color.Blue), 142, 115, 15, 15);
                 timer1.Stop();
-                grabarRecord(segundos, "peter", ipp);
-                //Introducir nombre
-                //MessageBox.Show("Introduzca su nombre", "TITULO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
+                //Esto lo hago para que no me duplique lineas y no entre seguido al metodo onPaint
+                cont = 0;
+                MessageBox.Show("JUEGO FINALIZADO");
+                grabarRecord(segundos, n, ipp);
             }
-
         }
 
         private void grabarRecord(int tiempo, String nombre, IPAddress iPAddress)
@@ -218,33 +234,34 @@ namespace Cliente
                 }
                 if (almacen.Count < 10)
                 {
-                    //{
-                    sw.WriteLine(tiempo + " " + nombre + " " + iPAddress);
-                    sw.Flush();
-                    //}
+                    lock (l)
+                    {
+                        sw.WriteLine(tiempo + " " + nombre + " " + iPAddress);
+                        sw.Flush();
+                    }
                 }
                 else
                 {
                     for (int i = 0; i < almacen.Count; i++)
                     {
-                        if (almacen[i] > segundos)
+                        lock (l)
                         {
+                            if (almacen[i] > segundos)
+                            {
 
-                            sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
-                            sw.Flush();
-                            break;
+                                sw.WriteLine(tiempo + "" + nombre + "" + iPAddress);
+                                sw.Flush();
+                                break;
+                            }
+
                         }
+
                     }
                 }
             }
             //Nombre 3 caracteres
             //Maximo 10 recors
 
-
-        }
-
-        private void Panel1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 
@@ -256,7 +273,8 @@ namespace Cliente
 
         private void Button5_Click(object sender, EventArgs e)
         {
-
+            String suma = "closeserver " + textBox2.Text;
+            conectar(suma);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -266,8 +284,11 @@ namespace Cliente
 
         private void Button4_Click(object sender, EventArgs e)
         {
+            banderaRecord = true;
             conectar("getrecords");
-            txtRecords.Text = "" + palabraReseolver;
+          
+            txtRecords.Text += palabraReseolver;
+            banderaRecord = false;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Ejercicio4Networkin
     {
         static bool bandera = true;
         static bool finalizacion = true;
+        static readonly object l = new object();
         static void Main(string[] args)
         {
             IPEndPoint ie = new IPEndPoint(IPAddress.Any, 31416);
@@ -39,32 +40,71 @@ namespace Ejercicio4Networkin
             using (StreamReader sr = new StreamReader(ns))
             {
 
-                sw.WriteLine("Introduzca una palabra");
-                sw.Flush();
+                String txt = sr.ReadLine();
+                String[] troceo = txt.Split(' ');
                 while (finalizacion)
                 {
-                    if (sr.ReadLine().Equals("getword"))
+                    try
                     {
-                        using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt")) {
-                            //enviar parte [] del archivo
-                            String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
-                            int tamaño = conjuntoPalabras.Length;
-                            Random r = new Random();
-                            int numeroAleatorio = r.Next(0, tamaño);
-                            sw.WriteLine("Resultado de Getword: " + numeroAleatorio);
-                            sw.Flush();
+
+                        if (txt.Equals("getword"))
+                        {
+                            lock (l)
+                            {
+                                //ruta del homepath de marras
+                                using (StreamReader lectura = new StreamReader("C:/Users/User/Desktop/getword.txt"))
+                                {
+                                    String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
+                                    int tamaño = conjuntoPalabras.Length;
+                                    Random r = new Random();
+                                    int numeroAleatorio = r.Next(0, tamaño);
+                                    sw.WriteLine(conjuntoPalabras[numeroAleatorio]);
+                                    sw.Flush();
+
+                                }
+                            }
+                        }
+                        else if (txt.Equals("getrecords"))
+                        {
+                            lock (l)
+                            {
+                                using (StreamReader srr = new StreamReader("C:/Users/User/Desktop/getrecords.txt"))
+                                {
+                                    String[] texto = srr.ReadToEnd().Split('\n');
+                                    for (int i = 0; i < texto.Length; i++)
+                                    {
+                                        sw.WriteLine(texto[i] + "\n");
+                                        sw.Flush();
+                                    }
+
+
+                                }
+                            }
 
                         }
+                        else if (troceo[0].Equals("sendword"))
+                        {
+                            using (StreamWriter sww = new StreamWriter("C:/Users/User/Desktop/getword.txt", true))
+                            {
+                                sww.WriteLine(troceo[1]);
+                                sww.Flush();
+                            }
 
 
+                        }
+                        else if (troceo[0].Equals("sendrecord"))
+                        {
+
+                        }
+                        else if (troceo[0].Equals("closerver")) {
+
+                        }
+                    }
+                    catch (IOException)
+                    {
 
                     }
-                   
-
-
-
-
-
+                    finalizacion = false;
 
                 }
 
