@@ -103,9 +103,10 @@
             // 
             // txtRecords
             // 
-            this.txtRecords.Location = new System.Drawing.Point(57, 122);
+            this.txtRecords.Location = new System.Drawing.Point(705, 122);
+            this.txtRecords.Multiline = true;
             this.txtRecords.Name = "txtRecords";
-            this.txtRecords.Size = new System.Drawing.Size(828, 22);
+            this.txtRecords.Size = new System.Drawing.Size(224, 204);
             this.txtRecords.TabIndex = 7;
             // 
             // button4
@@ -130,10 +131,10 @@
             // 
             // textBox2
             // 
-            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(30, 502);
             this.textBox2.MaxLength = 4;
             this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(171, 22);
             this.textBox2.TabIndex = 10;
             // 

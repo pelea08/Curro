@@ -16,8 +16,10 @@ namespace Cliente
     public partial class Form1 : Form
     {
         String palabraReseolver;
+        String palabraReseolverAux;
         String labelAuxiliar;
         bool bandera = false;
+        bool banderaCerrar = false;
         String palabraNueva;
         String[] rayitas;
         int cont;
@@ -27,7 +29,7 @@ namespace Cliente
         int segundos = 0;
         IPAddress ipp;
         static readonly object l = new object();
-
+        int contTamaño = 0;
         bool banderaRecord;
 
         public Form1()
@@ -45,8 +47,9 @@ namespace Cliente
         {
             String texto = "getword";
             Form3 f = new Form3();
-            //f.ShowDialog();
-            if (f.ShowDialog() == DialogResult.OK)
+            f.ShowDialog();
+            //if (f.ShowDialog() == DialogResult.OK)
+            if (f.bandera)
             {
                 n = f.nombre;
                 f.Dispose();
@@ -72,8 +75,10 @@ namespace Cliente
                 button2.Enabled = true;
                 txtAdivinar.Enabled = true;
                 button1.Enabled = false;
+                button3.Enabled = false;
 
             }
+
         }
         private void conectar(string texto)
         {
@@ -81,101 +86,130 @@ namespace Cliente
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ie);
             ipp = ie.Address;
-            bool fin = true;
+
             using (NetworkStream ns = new NetworkStream(s))
             using (StreamReader sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
-                //OJO WHILE si lo pongo bucle infinito
+                sw.WriteLine(texto);
+                sw.Flush();
 
-                //if (banderaRecord)
-                //{
-                //    while (fin) {
-                //        sw.WriteLine(texto);
-                //        sw.Flush();
-                //        palabraReseolver +="\n"+ sr.ReadLine();
-                //    }
-                //    fin = false;
-                //}
-                //else {
-                    sw.WriteLine(texto);
-                    sw.Flush();
-                    palabraReseolver = sr.ReadLine();
-                //}
-                
+
+                if (banderaVerificar)
+                {
+                    while (palabraReseolver != "#finarchivo")
+                    {
+                        palabraReseolver = sr.ReadLine();
+                        palabraReseolverAux += "\n" + palabraReseolver + "\n";
+                    }
+                    banderaRecord = true;
+                }
+                else
+                {
+                    if (!banderaCerrar)
+                    {
+                        palabraReseolver = sr.ReadLine();
+
+                    }
+                }
 
             }
         }
-        //DIFRENCIAR MAYUSCULAS MINISCULAS cualquier palabra que meta en el textbox la pasamos a minuscula
         private void Button2_Click(object sender, EventArgs e)
         {
-            //se vacia cada click que doy
-            List<int> almacenPosiciones = new List<int>();
+            char[] caracter = { };
 
-            if (!bandera)
-            {
-                rayitas = labelAuxiliar.Split('-');
-                bandera = true;
-                label1.Text = "";
-
-            }
-            else
-            {
-                //rayitas = palabraNueva.Split('-');
-                //label1.Text = "";
-
-            }
             String letraTextbox = txtAdivinar.Text;
 
+            if (letraTextbox != "")
+            {
+                List<int> almacenPosiciones = new List<int>();
 
-            char[] caracter = palabraReseolver.ToCharArray();
-            for (int i = 0; i < caracter.Length; i++)
-            {
-                if (caracter[i].ToString().Equals(letraTextbox))
+                if (!bandera)
                 {
-                    almacenPosiciones.Add(i);
-                    banderaPuntos = true;
-                }
-
-            }
-            if (!banderaPuntos)
-            {
-                cont++;
-                banderaVerificar = true;
-                for (int k = 0; k < rayitas.Length; k++)
-                {
-                    if (rayitas.Length - 1 == k)
-                    {
-                        palabraNueva += rayitas[k];
-                    }
-                    else
-                    {
-                        palabraNueva += rayitas[k] + "-";
-                    }
-                }
-                label1.Text = palabraNueva;
-                palabraNueva = "";
-            }
-            else
-            {
-                for (int j = 0; j < almacenPosiciones.Count; j++)
-                {
-                    rayitas[almacenPosiciones[j]] = letraTextbox;
+                    rayitas = labelAuxiliar.Split('-');
+                    bandera = true;
                     label1.Text = "";
+
+                }
+                //else
+                //{
+                //    rayitas = palabraNueva.Split('-');
+                //    label1.Text = "";
+
+                //}
+
+                caracter = palabraReseolver.ToCharArray();
+                for (int i = 0; i < caracter.Length; i++)
+                {
+                    if (caracter[i].ToString() == letraTextbox)
+                    {
+                        almacenPosiciones.Add(i);
+                        banderaPuntos = true;
+                        contTamaño++;
+
+
+                    }
+                }
+                if (!banderaPuntos)
+                {
+                    cont++;
+                    banderaVerificar = true;
                     for (int k = 0; k < rayitas.Length; k++)
                     {
                         if (rayitas.Length - 1 == k)
                         {
                             palabraNueva += rayitas[k];
+
                         }
                         else
                         {
                             palabraNueva += rayitas[k] + "-";
+
                         }
                     }
                     label1.Text = palabraNueva;
+
                     palabraNueva = "";
+
                 }
+                else
+                {
+                    for (int j = 0; j < almacenPosiciones.Count; j++)
+                    {
+                        rayitas[almacenPosiciones[j]] = letraTextbox;
+                        label1.Text = "";
+                        for (int k = 0; k < rayitas.Length; k++)
+                        {
+                            if (rayitas.Length - 1 == k)
+                            {
+                                palabraNueva += rayitas[k];
+
+                            }
+                            else
+                            {
+                                palabraNueva += rayitas[k] + "-";
+
+                            }
+                        }
+                        label1.Text = palabraNueva;
+
+                        palabraNueva = "";
+
+                    }
+                    banderaPuntos = false;
+                    if (contTamaño == caracter.Length)
+                    {
+                        timer1.Stop();
+                        MessageBox.Show("Enhorabuena Has Ganado");
+                        grabarRecord(segundos, n, ipp);
+
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Introduce algo");
             }
             this.Refresh();
         }
@@ -204,11 +238,9 @@ namespace Cliente
                 g.DrawLine(new Pen(Color.Red), 100, 100, 150, 100);
                 g.DrawLine(new Pen(Color.Red), 150, 100, 150, 115);
                 g.DrawEllipse(new Pen(Color.Blue), 142, 115, 15, 15);
-                timer1.Stop();
                 //Esto lo hago para que no me duplique lineas y no entre seguido al metodo onPaint
                 cont = 0;
-                MessageBox.Show("JUEGO FINALIZADO");
-                grabarRecord(segundos, n, ipp);
+                MessageBox.Show("JUEGO FINALIZADO HAS PERDIDO");
             }
         }
 
@@ -273,8 +305,26 @@ namespace Cliente
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            String suma = "closeserver " + textBox2.Text;
-            conectar(suma);
+            try
+            {
+                if (textBox2.Text != "" && Convert.ToInt32(textBox2.Text) == 1234)
+                {
+                    String suma = "closeserver " + textBox2.Text;
+                    banderaCerrar = true;
+                    conectar(suma);
+                    banderaCerrar = false;
+                }
+                else
+                {
+                    MessageBox.Show("Contraseña Incorrecta");
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Introduzca un valor valido");
+            }
+
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -284,11 +334,17 @@ namespace Cliente
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            banderaRecord = true;
+            banderaVerificar = true;
             conectar("getrecords");
-          
-            txtRecords.Text += palabraReseolver;
-            banderaRecord = false;
+
+
+            if (banderaRecord)
+            {
+                txtRecords.Text = palabraReseolverAux + "\n";
+                banderaRecord = false;
+            }
+            banderaVerificar = false;
+
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Ejercicio4Networkin
         static bool bandera = true;
         static readonly object l = new object();
         public static bool finLectura = false;
+        static bool valorIncorrecto = false;
         //static bool finalizacion = true;
 
         static void Main(string[] args)
@@ -42,7 +43,7 @@ namespace Ejercicio4Networkin
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-
+                Console.WriteLine("Conectado");
                 String txt = sr.ReadLine();
                 String[] troceo = txt.Split(' ');
                 List<StreamWriter> almacen = new List<StreamWriter>();
@@ -59,8 +60,6 @@ namespace Ejercicio4Networkin
                             {
                                 lock (l)
                                 {
-                                    //ruta del homepath de marras
-                                    //Environment.GetEnvironmentVariable("homepath") + "\\" + "Desktop"
                                     using (StreamReader lectura = new StreamReader(Environment.GetEnvironmentVariable("homepath") + "\\" + "Desktop" + "\\" + "getword.txt"))
                                     {
                                         String[] conjuntoPalabras = lectura.ReadToEnd().Split('\n');
@@ -108,7 +107,6 @@ namespace Ejercicio4Networkin
                                     using (StreamWriter sww = new StreamWriter(Environment.GetEnvironmentVariable("homepath") + "\\" + "Desktop" + "\\" + "getrecords.txt", true))
                                     {
                                         IPAddress a;
-                                        //falta verificacion
                                         if (troceo[1] != null && troceo[2] != null && troceo[3] != null)
                                         {
                                             try
@@ -119,8 +117,6 @@ namespace Ejercicio4Networkin
                                                     {
                                                         if (IPAddress.TryParse(troceo[3], out a))
                                                         {
-                                                            //revisar funcion ip
-                                                            Console.WriteLine("g");
                                                             sww.WriteLine(troceo[1] + " " + troceo[2] + " " + troceo[3]);
                                                             sww.Flush();
                                                         }
@@ -138,12 +134,12 @@ namespace Ejercicio4Networkin
                             {
                                 if (Convert.ToInt32(troceo[1]) == claveCierre)
                                 {
+                                    Environment.Exit(0);
                                     finalizacion = false;
                                 }
                             }
                         }
                         finalizacion = false;
-
                     }
                     catch (IOException)
                     {
@@ -151,7 +147,11 @@ namespace Ejercicio4Networkin
                         break;
                     }
                 }
-                Console.WriteLine("CONEXIÓN FINALIZADA");
+                //if (!finalizacion)
+                //{
+                //    Console.WriteLine("CONEXIÓN FINALIZADA");
+
+                //}
             }
         }
     }
