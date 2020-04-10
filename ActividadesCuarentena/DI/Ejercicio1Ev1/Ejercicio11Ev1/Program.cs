@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DIRECTIVA
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +14,31 @@ namespace Ejercicio11Ev1
         {
             int op = 0;
             Videojuegos juegos;
-            Videojuegos juego1 = new Videojuegos("titulo 1", 2000, Videojuegos.Estilo.Estrategia, "Samsung");
-            Videojuegos juego2 = new Videojuegos("titulo 2", 2123, Videojuegos.Estilo.Deportivo, "CHUAN");
-            Videojuegos juego3 = new Videojuegos("titulo 3", 345, Videojuegos.Estilo.Videoaventuras, "TRRSS");
             List<Videojuegos> almacen = new List<Videojuegos>();
-            almacen.Add(juego1);
-            almacen.Add(juego2);
-            almacen.Add(juego3);
 
+#if DIRECTIVA
+            almacen.Add(new Videojuegos("titulo 1", 2000, Videojuegos.Estilo.Estrategia, "Samsung"));
+            almacen.Add(new Videojuegos("titulo 2", 2123, Videojuegos.Estilo.Deportivo, "CHUAN"));
+            almacen.Add(new Videojuegos("titulo 3", 345, Videojuegos.Estilo.Videoaventuras, "TRRSS"));
+#endif
             void visualizar()
             {
                 for (int i = 0; i < almacen.Count; i++)
                 {
                     int aux = i + 1;
-
-                    Console.WriteLine("Posición: " + aux + "-" + "Titulo: " + almacen[i].Titulo + " Estilo: " + almacen[i].Tipojuego + " Fabricante: " + almacen[i].Fabricante + " Año: " + almacen[i].Año);
+                    Console.WriteLine("Posición: " + aux + "Titulo: " + almacen[i].Titulo + " Estilo: " + almacen[i].Tipojuego + " Fabricante: " + almacen[i].Fabricante + " Año: " + almacen[i].Año);
                 }
             }
-
+            void visualizarFormateado()
+            {
+                const string FORMAT = "{0,-15}  {1,-15}  {2,-15}  {3,-15} {4,-15}";
+                Console.WriteLine(string.Format(FORMAT, "Posición", "Titulo", "Tipo", "Fabricante", "Año"));
+                for (int i = 0; i < almacen.Count; i++)
+                {
+                    int aux = i + 1;
+                    Console.WriteLine(string.Format(FORMAT, aux, almacen[i].Titulo, almacen[i].Tipojuego, almacen[i].Fabricante, almacen[i].Año));
+                }
+            }
 
             do
             {
@@ -49,22 +57,20 @@ namespace Ejercicio11Ev1
                 {
                     op = Convert.ToInt32(Console.ReadLine());
 
-
-
-
                     switch (op)
                     {
                         case 1:
-
-                            //REVISAR LO DE PRINCIPIO Y FINAL DE LA COLECION DE INSERCION
                             String titulo, fabricante;
                             int año, estilo;
                             Console.WriteLine("Introduzca un titulo");
                             titulo = Console.ReadLine();
                             Console.WriteLine("Introduzca el fabricante");
                             fabricante = Console.ReadLine();
-                            Console.WriteLine("Introduzca el año");
-                            año = Convert.ToInt32(Console.ReadLine());
+                            do
+                            {
+                                Console.WriteLine("Introduzca el año");
+                                año = Convert.ToInt32(Console.ReadLine());
+                            } while (año < 1958 || año > 2020);
                             do
                             {
                                 Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
@@ -102,7 +108,6 @@ namespace Ejercicio11Ev1
                             String tituloBuscar = "";
                             Console.WriteLine("Introduzca el titulo a buscar");
                             tituloBuscar = Console.ReadLine();
-                            //Si existe que muestre sus datos
                             for (int i = 0; i < almacen.Count; i++)
                             {
                                 if (almacen[i].Titulo == tituloBuscar)
@@ -111,8 +116,6 @@ namespace Ejercicio11Ev1
                                     Console.WriteLine("Titulo: " + almacen[i].Titulo + " Estilo: " + almacen[i].Tipojuego + " Fabricante: " + almacen[i].Fabricante + " Año: " + almacen[i].Año);
                                     noExiste = false;
                                 }
-
-
                             }
                             if (noExiste)
                             {
@@ -120,15 +123,20 @@ namespace Ejercicio11Ev1
                             }
                             break;
                         case 4:
-                            visualizar();
+                            visualizarFormateado();
                             break;
                         case 5:
-                            //Visualizar Videojuegos año determinado y estilo determinado
                             int añoo, estiloo;
-                            Console.WriteLine("Introduzca un año determinado");
-                            añoo = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
-                            estiloo = Convert.ToInt32(Console.ReadLine());
+                            do
+                            {
+                                Console.WriteLine("Introduzca un año determinado");
+                                añoo = Convert.ToInt32(Console.ReadLine());
+                            } while (añoo < 1958 || añoo > 2020);
+                            do
+                            {
+                                Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
+                                estiloo = Convert.ToInt32(Console.ReadLine());
+                            } while (estiloo > 5 || estiloo < 1);
                             for (int i = 0; i < almacen.Count; i++)
                             {
                                 if (almacen[i].Año == añoo && almacen[i].Tipojuego == (Videojuegos.Estilo)estiloo)
@@ -138,17 +146,15 @@ namespace Ejercicio11Ev1
                             }
                             break;
                         case 6:
-                            //Modificación de un videojuego (buscará por posición)
-
-
-
                             int nElegir = 0;
                             visualizar();
-                            Console.WriteLine("Introduzca el numero de posicion del juego que desea modificar");
-                            nElegir = Convert.ToInt32(Console.ReadLine());
+                            do
+                            {
+                                Console.WriteLine("Introduzca el numero de posicion del juego que desea modificar");
+                                nElegir = Convert.ToInt32(Console.ReadLine());
+                            } while (nElegir < 1 || nElegir > almacen.Count);
                             for (int i = 0; i < almacen.Count; i++)
                             {
-                                //OJO REVISAR ESTA VAINA
                                 int n = i + 1;
                                 if (n == nElegir)
                                 {
@@ -156,45 +162,53 @@ namespace Ejercicio11Ev1
                                     Console.WriteLine("Introduzca un nuevo titulo");
                                     tituloNew = Console.ReadLine();
                                     int añoNew;
-                                    Console.WriteLine("Inserte un año nuevo");
-                                    añoNew = Convert.ToInt32(Console.ReadLine());
+                                    do
+                                    {
+                                        Console.WriteLine("Inserte un año nuevo");
+                                        añoNew = Convert.ToInt32(Console.ReadLine());
+                                    } while (añoNew < 1958 || añoNew > 2020);
+
                                     string fabricanteNew;
                                     Console.WriteLine("Introduce nuevo fabricante");
                                     fabricanteNew = Console.ReadLine();
                                     int estiloNew;
-                                    Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
-                                    estiloNew = Convert.ToInt32(Console.ReadLine());
+                                    do
+                                    {
+                                        Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
+                                        estiloNew = Convert.ToInt32(Console.ReadLine());
+                                    } while (estiloNew > 5 || estiloNew < 1);
+
                                     int estiloNewDefinitivo = estiloNew - 1;
                                     almacen[i].Titulo = tituloNew;
                                     almacen[i].Año = añoNew;
                                     almacen[i].Tipojuego = (Videojuegos.Estilo)estiloNewDefinitivo;
                                     almacen[i].Fabricante = fabricanteNew;
-
                                 }
-
                             }
-
                             break;
-
                         case 7:
                             int res = 0;
-                            Console.WriteLine("Esta seguro que desea borrar todo 1-SI 2-NO");
-                            res = Convert.ToInt32(Console.ReadLine());
+                            do
+                            {
+                                Console.WriteLine("Esta seguro que desea borrar todo 1-SI 2-NO");
+                                res = Convert.ToInt32(Console.ReadLine());
+                            } while (res < 1 || res > 2);
+
                             if (res == 1)
                             {
                                 almacen = new List<Videojuegos>();
-
+                                Console.WriteLine("Se ha borrado correctamente");
                             }
-
-
                             break;
-
-
                     }
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Introduzca un valor valido");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Introduzca una opcion valida");
                 }
 
             } while (op != 8);
