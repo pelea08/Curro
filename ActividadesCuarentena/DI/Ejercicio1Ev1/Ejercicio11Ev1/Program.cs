@@ -37,6 +37,11 @@ namespace Ejercicio11Ev1
                 {
                     int aux = i + 1;
                     Console.WriteLine(string.Format(FORMAT, aux, almacen[i].Titulo, almacen[i].Tipojuego, almacen[i].Fabricante, almacen[i].Año));
+                    if (aux % 10 == 0)
+                    {
+                        Console.WriteLine("Pulse para continuar");
+                        Console.ReadLine();
+                    }
                 }
             }
 
