@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\bin\Debug\Ejer2Ev1.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\bin\Debug\Ejer2Ev1.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\bin\Debug\Ejer2Ev1.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\obj\Debug\Ejer2Ev1.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\obj\Debug\Ejer2Ev1.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\obj\Debug\Ejer2Ev1.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer2Ev1\Ejer2Ev1\obj\Debug\Ejer2Ev1.pdb
