@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace Ejer2Ev1
 {
     class Program
     {
+        static string ruta;
+
         static void Main(string[] args)
         {
             int op = 0;
@@ -31,10 +35,97 @@ namespace Ejer2Ev1
                     {
 
                         case 1:
+                            Process[] processes = Process.GetProcesses();
+                            foreach (Process process in processes)
+                            {
+                                Console.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
+                            }
+                            break;
+                        case 2:
+                            int proceso;
+                            do
+                            {
+                                Console.WriteLine("Introduzca un numero de proceso");
+                                proceso = Convert.ToInt32(Console.ReadLine());
+
+                            } while (proceso < 0 || proceso > 65555);
+
+                            Process p = Process.GetProcessById(proceso);
+                            ProcessModule processModule = p.MainModule;
+                            Console.WriteLine("Name: " + p.ProcessName + " ID: " + p.Id + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
+                            break;
+                        case 3:
+                            int proceso2;
+                            do
+                            {
+                                Console.WriteLine("Introduzca un numero de proceso");
+                                proceso2 = Convert.ToInt32(Console.ReadLine());
+
+                            } while (proceso2 < 0 || proceso2 > 65555);
+                            Process p2 = Process.GetProcessById(proceso2);
+                            p2.CloseMainWindow();
+                            Console.WriteLine("Se ha cerrado correctamente");
+
+                            break;
+                        case 4:
+                            int proceso1;
+                            do
+                            {
+                                Console.WriteLine("Introduzca un numero de proceso");
+                                proceso1 = Convert.ToInt32(Console.ReadLine());
+
+                            } while (proceso1 < 0 || proceso1 > 65555);
+                            Process p1 = Process.GetProcessById(proceso1);
+                            p1.Kill();
+                            Console.WriteLine("Se ha cerrado correctamente");
                             break;
 
+                        case 5:
+                            string nombrePath;
+                            Console.WriteLine("Introduce una ruta para ejecutar una app");
+                            nombrePath = Console.ReadLine();
+                            Process p3 = Process.Start(nombrePath);
+
+                            break;
+                        case 6:
+                            Console.WriteLine("Introduzca una ruta para guardar el archivo");
+                            ruta = Console.ReadLine();
+                            using (StreamWriter sw = new StreamWriter(ruta))
+                            {
+                                Process[] processes2 = Process.GetProcesses();
+                                foreach (Process process in processes2)
+                                {
+                                    sw.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
+                                    //?
+                                    sw.Flush();
+                                }
+
+                            }
+                            break;
+                        case 7:
+                            FileStream f = File.OpenRead(ruta);
+                            if (f.Length > 0)
+                            {
+                                using (StreamReader sr = new StreamReader(ruta))
+                                {
+                                    Console.WriteLine(sr);
+
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("El archivo esta vacio");
+                            }
 
 
+
+
+
+
+                            break;
+
+                        case 8:
+                            break;
                     }
                 }
                 catch (OverflowException)
@@ -49,7 +140,7 @@ namespace Ejer2Ev1
 
             } while (op < 1 || op > 8);
 
-
+            Console.ReadLine();
         }
     }
 }
