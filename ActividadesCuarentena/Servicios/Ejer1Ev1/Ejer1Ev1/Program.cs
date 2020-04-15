@@ -14,6 +14,7 @@ namespace Ejer1Ev1
         static int ganador;
         static Timer timer;
         static int apuesta;
+        static bool[] banderas = new bool[6];
 
         static void Main(string[] args)
         {
@@ -52,7 +53,6 @@ namespace Ejer1Ev1
 
                 Console.Clear();
 
-
                 Thread[] conjuntoCaballos = new Thread[5];
                 for (int i = 0; i < 5; i++)
                 {
@@ -63,8 +63,32 @@ namespace Ejer1Ev1
                     conjuntoCaballos[j].Start(j);
                 }
 
+                //tropezar = new Thread(tropiezo);
+                for (int i = 0; i < banderas.Length; i++)
+                {
+                    banderas[i] = true;
+                }
+
+                Random rr = new Random();
+                int aleatorio = rr.Next(0, banderas.Length);
                 lock (l)
                 {
+                    banderas[aleatorio] = false;
+                    Console.SetCursorPosition(1, 17);
+                    Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
+                }
+                Thread.Sleep(2000);
+
+                lock (l)
+                {
+
+
+                    for (int i = 0; i < banderas.Length; i++)
+                    {
+                        banderas[i] = true;
+                    }
+
+                    //El wait lo lógico es que sea aqui no antes
                     Monitor.Wait(l);
                     if (apuesta == ganador)
                     {
@@ -74,16 +98,16 @@ namespace Ejer1Ev1
                     else
                     {
                         Console.SetCursorPosition(1, 23);
-                        Console.Write("HAS PERDIDO\n");
+                        Console.Write(apuesta + " HAS PERDIDO EL GANADOR ES EL NUMERO " + ganador + "\n");
                     }
                     bool band = false;
                     do
                     {
                         try
                         {
-                            //Console.SetCursorPosition(1, 25);
                             Console.WriteLine("Desea volver a jugar 1-Si 2-No");
                             repetir = Convert.ToInt32(Console.ReadLine());
+                            Console.Clear();
                             band = false;
                         }
                         catch (FormatException)
@@ -98,11 +122,7 @@ namespace Ejer1Ev1
                         }
 
                     } while (repetir < 1 || repetir > 2 || band);
-
                 }
-
-
-
             }
             Console.ReadLine();
 
@@ -110,7 +130,23 @@ namespace Ejer1Ev1
 
 
 
+        //static void tropiezo(object a)
+        //{
+        //    for (int i = 0; i < banderas.Length; i++)
+        //    {
+        //        banderas[i] = true;
+        //    }
 
+        //    Random rr = new Random();
+        //    int aleatorio = rr.Next(0, banderas.Length);
+        //    lock (l)
+        //    {
+        //        banderas[aleatorio] = false;
+        //        Console.SetCursorPosition(1, 17);
+        //        Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
+        //    }
+        //    Thread.Sleep(2000);
+        //}
         static void caballos(object caballo)
         {
             Random r = new Random();
@@ -123,7 +159,8 @@ namespace Ejer1Ev1
                 int caballoActual = (int)caballo + 1;
                 lock (l)
                 {
-                    if (!finalizacion)
+                    int proba = i - 1;
+                    if (banderas[proba])
                     {
                         Console.SetCursorPosition(1 + i, caballoActual);
                         Console.Write("*");
@@ -132,13 +169,11 @@ namespace Ejer1Ev1
                         if (i == 5)
                         {
                             finalizacion = true;
-                            ganador = (int)caballo;
+                            ganador = caballoActual;
                             Monitor.Pulse(l);
                             //intersante al llegar aqui implica finalizacion es decir plantearse pulse 
-
                         }
                     }
-
                 }
                 //ojo poner variable aleatorio
                 Thread.Sleep(125);
