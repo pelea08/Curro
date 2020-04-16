@@ -54,7 +54,7 @@ namespace Ejer2Ev1
                             Process p = Process.GetProcessById(proceso);
                             //OJO EXCEPCION WIN 32
                             ProcessModule processModule = p.MainModule;
-                            Console.WriteLine("Name: " + p.ProcessName + " ID: " + p.Id + " Titulo Ventana: " + p.MainWindowTitle + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
+                            Console.WriteLine("Name: " + p.ProcessName + " Hora de Comienzo: " + p.StartTime + " ID: " + p.Id + " Titulo Ventana: " + p.MainWindowTitle + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
                             break;
                         case 3:
                             int proceso2;
