@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Ejer2Ev1
                             Process[] processes = Process.GetProcesses();
                             foreach (Process process in processes)
                             {
-                                Console.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
+                                Console.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id + " Titulo Ventana: " + process.MainWindowTitle);
                             }
                             break;
                         case 2:
@@ -51,8 +52,9 @@ namespace Ejer2Ev1
                             } while (proceso < 0 || proceso > 65555);
 
                             Process p = Process.GetProcessById(proceso);
+                            //OJO EXCEPCION WIN 32
                             ProcessModule processModule = p.MainModule;
-                            Console.WriteLine("Name: " + p.ProcessName + " ID: " + p.Id + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
+                            Console.WriteLine("Name: " + p.ProcessName + " ID: " + p.Id + " Titulo Ventana: " + p.MainWindowTitle + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
                             break;
                         case 3:
                             int proceso2;
@@ -96,32 +98,15 @@ namespace Ejer2Ev1
                                 foreach (Process process in processes2)
                                 {
                                     sw.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
-                                    //?
-                                    sw.Flush();
                                 }
 
                             }
                             break;
                         case 7:
-                            FileStream f = File.OpenRead(ruta);
-                            if (f.Length > 0)
+                            using (StreamReader sr = new StreamReader(ruta))
                             {
-                                using (StreamReader sr = new StreamReader(ruta))
-                                {
-                                    Console.WriteLine(sr);
-
-                                }
+                                Console.WriteLine(sr);
                             }
-                            else
-                            {
-                                Console.WriteLine("El archivo esta vacio");
-                            }
-
-
-
-
-
-
                             break;
 
                         case 8:
@@ -136,9 +121,21 @@ namespace Ejer2Ev1
                 {
                     Console.WriteLine("Introduzca números");
                 }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine("Introduzca una ruta o app adecuada");
+                }
+                catch (Win32Exception)
+                {
+                    Console.WriteLine("Ruta o aplicación no existe");
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("No hay archivo cargado");
+                }
 
 
-            } while (op < 1 || op > 8);
+            } while (op != 8);
 
             Console.ReadLine();
         }

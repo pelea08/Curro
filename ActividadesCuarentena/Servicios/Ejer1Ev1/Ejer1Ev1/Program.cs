@@ -12,9 +12,11 @@ namespace Ejer1Ev1
         static bool finalizacion = false;
         static readonly object l = new object();
         static int ganador;
-        static Timer timer;
         static int apuesta;
-        static bool[] banderas = new bool[6];
+        static bool[] banderas = new bool[5];
+        static Random r = new Random();
+
+        static int distanciaAleatoria = r.Next(1, 20);
 
         static void Main(string[] args)
         {
@@ -22,7 +24,6 @@ namespace Ejer1Ev1
 
             int repetir = 1;
 
-            Random r = new Random();
             int diez = r.Next(1, 10);
             int distancia = diez;
             int tiempo = diez;
@@ -62,33 +63,11 @@ namespace Ejer1Ev1
                 {
                     conjuntoCaballos[j].Start(j);
                 }
-
-                //tropezar = new Thread(tropiezo);
-                for (int i = 0; i < banderas.Length; i++)
-                {
-                    banderas[i] = true;
-                }
-
-                Random rr = new Random();
-                int aleatorio = rr.Next(0, banderas.Length);
-                lock (l)
-                {
-                    banderas[aleatorio] = false;
-                    Console.SetCursorPosition(1, 17);
-                    Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
-                }
-                Thread.Sleep(2000);
+                tropezar = new Thread(tropiezo);
+                tropezar.Start();
 
                 lock (l)
                 {
-
-
-                    for (int i = 0; i < banderas.Length; i++)
-                    {
-                        banderas[i] = true;
-                    }
-
-                    //El wait lo lógico es que sea aqui no antes
                     Monitor.Wait(l);
                     if (apuesta == ganador)
                     {
@@ -130,43 +109,50 @@ namespace Ejer1Ev1
 
 
 
-        //static void tropiezo(object a)
-        //{
-        //    for (int i = 0; i < banderas.Length; i++)
-        //    {
-        //        banderas[i] = true;
-        //    }
+        static void tropiezo()
+        {
+            for (int i = 0; i < banderas.Length; i++)
+            {
+                banderas[i] = true;
+            }
 
-        //    Random rr = new Random();
-        //    int aleatorio = rr.Next(0, banderas.Length);
-        //    lock (l)
-        //    {
-        //        banderas[aleatorio] = false;
-        //        Console.SetCursorPosition(1, 17);
-        //        Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
-        //    }
-        //    Thread.Sleep(2000);
-        //}
+            Random rr = new Random();
+            int aleatorio = rr.Next(0, banderas.Length);
+            lock (l)
+            {
+                banderas[aleatorio] = false;
+                Console.SetCursorPosition(1, 17);
+                Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
+            }
+            Thread.Sleep(5000);
+
+            for (int i = 0; i < banderas.Length; i++)
+            {
+                banderas[i] = true;
+            }
+
+        }
+
         static void caballos(object caballo)
         {
             Random r = new Random();
             int dormirAleatorio = r.Next(200, 1000);
-            int distanciaAleatoria = r.Next(1, 20);
-            int i = 1;
+            int contFinalizar = 1;
 
             while (!finalizacion)
             {
                 int caballoActual = (int)caballo + 1;
                 lock (l)
                 {
-                    int proba = i - 1;
-                    if (banderas[proba])
+                    int indiceBien = (int)caballo;
+                    if (banderas[indiceBien])
                     {
-                        Console.SetCursorPosition(1 + i, caballoActual);
+                        //Console.SetCursorPosition(distanciaAleatoria + contFinalizar, caballoActual);
+                        Console.SetCursorPosition(distanciaAleatoria, caballoActual);
                         Console.Write("*");
-                        i++;
+                        contFinalizar++;
 
-                        if (i == 5)
+                        if (contFinalizar == 15)
                         {
                             finalizacion = true;
                             ganador = caballoActual;
@@ -176,7 +162,7 @@ namespace Ejer1Ev1
                     }
                 }
                 //ojo poner variable aleatorio
-                Thread.Sleep(125);
+                Thread.Sleep(dormirAleatorio);
             }
 
         }
