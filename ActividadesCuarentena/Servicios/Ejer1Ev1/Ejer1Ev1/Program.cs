@@ -16,7 +16,8 @@ namespace Ejer1Ev1
         static bool[] banderas = new bool[5];
         static Random r = new Random();
 
-        static int distanciaAleatoria = r.Next(1, 20);
+        static int distanciaAleatoria = r.Next(1, 10);
+
 
         static void Main(string[] args)
         {
@@ -24,9 +25,9 @@ namespace Ejer1Ev1
 
             int repetir = 1;
 
-            int diez = r.Next(1, 10);
-            int distancia = diez;
-            int tiempo = diez;
+            //int diez = r.Next(1, 10);
+            //int distancia = diez;
+            //int tiempo = diez;
 
             while (repetir == 1)
             {
@@ -124,7 +125,7 @@ namespace Ejer1Ev1
                 Console.SetCursorPosition(1, 17);
                 Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
             }
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
 
             for (int i = 0; i < banderas.Length; i++)
             {
@@ -135,10 +136,8 @@ namespace Ejer1Ev1
 
         static void caballos(object caballo)
         {
-            Random r = new Random();
-            int dormirAleatorio = r.Next(200, 1000);
-            int contFinalizar = 1;
-
+            int dormirAleatorio = r.Next(2000, 3000);
+            int i = 1;
             while (!finalizacion)
             {
                 int caballoActual = (int)caballo + 1;
@@ -147,22 +146,20 @@ namespace Ejer1Ev1
                     int indiceBien = (int)caballo;
                     if (banderas[indiceBien])
                     {
-                        //Console.SetCursorPosition(distanciaAleatoria + contFinalizar, caballoActual);
-                        Console.SetCursorPosition(distanciaAleatoria, caballoActual);
+                        Console.SetCursorPosition(i + 1, caballoActual);
                         Console.Write("*");
-                        contFinalizar++;
 
-                        if (contFinalizar == 15)
+                        i += distanciaAleatoria;
+
+                        if (i >= 50)
                         {
                             finalizacion = true;
                             ganador = caballoActual;
                             Monitor.Pulse(l);
-                            //intersante al llegar aqui implica finalizacion es decir plantearse pulse 
                         }
                     }
                 }
-                //ojo poner variable aleatorio
-                Thread.Sleep(dormirAleatorio);
+                Thread.Sleep(1000);
             }
 
         }
