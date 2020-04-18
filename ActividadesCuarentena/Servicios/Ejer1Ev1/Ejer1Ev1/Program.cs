@@ -15,33 +15,21 @@ namespace Ejer1Ev1
         static int apuesta;
         static bool[] banderas = new bool[5];
         static Random r = new Random();
-
         static int distanciaAleatoria = r.Next(1, 10);
-
 
         static void Main(string[] args)
         {
-            Thread tropezar;
-
             int repetir = 1;
-
-            //int diez = r.Next(1, 10);
-            //int distancia = diez;
-            //int tiempo = diez;
-
             while (repetir == 1)
             {
-                //Console.Clear();
                 finalizacion = false;
                 repetir = 2;
                 do
                 {
                     try
                     {
-
                         Console.WriteLine("Apueste por un caballo del 1 al 5");
                         apuesta = Convert.ToInt32(Console.ReadLine());
-
                     }
                     catch (FormatException)
                     {
@@ -64,7 +52,7 @@ namespace Ejer1Ev1
                 {
                     conjuntoCaballos[j].Start(j);
                 }
-                tropezar = new Thread(tropiezo);
+                Thread tropezar = new Thread(tropiezo);
                 tropezar.Start();
 
                 lock (l)
@@ -73,7 +61,7 @@ namespace Ejer1Ev1
                     if (apuesta == ganador)
                     {
                         Console.SetCursorPosition(1, 23);
-                        Console.Write("ENHORABUENA GANASTE\n");
+                        Console.Write(apuesta + "ENHORABUENA GANASTE\n");
                     }
                     else
                     {
@@ -105,13 +93,11 @@ namespace Ejer1Ev1
                 }
             }
             Console.ReadLine();
-
         }
-
-
 
         static void tropiezo()
         {
+            //Inicializamos todo a true
             for (int i = 0; i < banderas.Length; i++)
             {
                 banderas[i] = true;
@@ -126,30 +112,29 @@ namespace Ejer1Ev1
                 Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
             }
             Thread.Sleep(4000);
-
-            for (int i = 0; i < banderas.Length; i++)
-            {
-                banderas[i] = true;
-            }
+            //Pasados los 4 segundos se vuelve a poner normal
+            banderas[aleatorio] = true;
 
         }
 
         static void caballos(object caballo)
         {
-            int dormirAleatorio = r.Next(2000, 3000);
+            int dormirAleatorio = r.Next(1000, 2000);
             int i = 1;
             while (!finalizacion)
             {
                 int caballoActual = (int)caballo + 1;
+
+                Console.SetCursorPosition(i + 1, caballoActual);
+                Console.Write(" ");
                 lock (l)
                 {
                     int indiceBien = (int)caballo;
                     if (banderas[indiceBien])
                     {
+                        i += distanciaAleatoria;
                         Console.SetCursorPosition(i + 1, caballoActual);
                         Console.Write("*");
-
-                        i += distanciaAleatoria;
 
                         if (i >= 50)
                         {
@@ -159,9 +144,8 @@ namespace Ejer1Ev1
                         }
                     }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(dormirAleatorio);
             }
-
         }
     }
 }
