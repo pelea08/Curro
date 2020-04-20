@@ -10,15 +10,15 @@ namespace Ejer2Ev1
     {
         public enum asignauras
         {
-            facebookads,
-            marketing,
-            seo,
-            sem
+            FacebookAds,
+            Marketing,
+            Seo,
+            Sem
         }
         static void Main(string[] args)
         {
             string[] nombres = { "Pedro", "Jesus", "Maria", "Jose", "Peter", "Mariano", "Pablo", "Tesla", "Fatema", "Jesusito", "Manolito", "Santiago" };
-            int op;
+            int op = 0;
             Random r = new Random();
             //4 asignaturas 12 alumnos
             int[,] tabla = new int[4, 12];
@@ -29,43 +29,43 @@ namespace Ejer2Ev1
                 for (j = 0; j < tabla.GetLength(1); j++)
                 {
                     int notaGenerada = r.Next(0, 101);
-                    if (notaGenerada < 9)
+                    if (notaGenerada < 6)
                     {
                         tabla[i, j] = 0;
                     }
-                    else if (notaGenerada < 19)
+                    else if (notaGenerada < 11)
                     {
                         tabla[i, j] = 1;
                     }
-                    else if (notaGenerada < 29)
+                    else if (notaGenerada < 16)
                     {
                         tabla[i, j] = 2;
                     }
-                    else if (notaGenerada < 39)
+                    else if (notaGenerada < 26)
                     {
                         tabla[i, j] = 3;
                     }
-                    else if (notaGenerada < 49)
+                    else if (notaGenerada < 41)
                     {
                         tabla[i, j] = 4;
                     }
-                    else if (notaGenerada < 59)
+                    else if (notaGenerada < 56)
                     {
                         tabla[i, j] = 5;
                     }
-                    else if (notaGenerada < 69)
+                    else if (notaGenerada < 71)
                     {
                         tabla[i, j] = 6;
                     }
-                    else if (notaGenerada < 79)
+                    else if (notaGenerada < 81)
                     {
                         tabla[i, j] = 7;
                     }
-                    else if (notaGenerada < 89)
+                    else if (notaGenerada < 91)
                     {
                         tabla[i, j] = 8;
                     }
-                    else if (notaGenerada < 99)
+                    else if (notaGenerada < 96)
                     {
                         tabla[i, j] = 9;
                     }
@@ -74,26 +74,32 @@ namespace Ejer2Ev1
                         tabla[i, j] = 10;
                     }
                 }
-
             }
-
-
 
             do
             {
                 Console.WriteLine("-----------------------");
-                Console.WriteLine("1-Media Notas Toda Tabla");
+                Console.WriteLine("1-Media notas toda tabla");
                 Console.WriteLine("2-Media de un alumno");
                 Console.WriteLine("3-Media de una asignatura");
                 Console.WriteLine("4-Visualizar notas de un alumno");
                 Console.WriteLine("5-Nota máxima y mínima de un alumno");
                 Console.WriteLine("6-Visualiza tabla completa");
                 Console.WriteLine("7-Salir");
-                op = Convert.ToInt32(Console.ReadLine());
-
+                try
+                {
+                    op = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Introduzca números");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Introduzca el rango adecuado");
+                }
                 switch (op)
                 {
-                    //Vigilar Excepciones00000000000000000000000000000000000000000000000000
                     case 1:
                         double suma = 0;
                         double res;
@@ -106,7 +112,7 @@ namespace Ejer2Ev1
                         }
                         res = suma / tabla.Length;
                         //res = suma / (12*4);
-                        Console.WriteLine("El resultado de la media es de :" + res);
+                        Console.WriteLine("El resultado de la media global es de :" + res);
                         break;
                     case 2:
                         int notaAlumno = 0;
@@ -119,9 +125,7 @@ namespace Ejer2Ev1
                             {
                                 if (nombres[ñ] == nombreBuscar)
                                 {
-
                                     notaAlumno += tabla[ñ, p];
-
                                 }
                             }
                         }
@@ -159,7 +163,6 @@ namespace Ejer2Ev1
                         {
                             Console.WriteLine("Intrduzca una asignatura valida");
                         }
-
                         break;
                     case 4:
                         //notas de un alumno determinado
@@ -168,7 +171,6 @@ namespace Ejer2Ev1
                         Console.WriteLine("Introduzca el nombre que desea a buscar");
                         nombreBuscar1 = Console.ReadLine();
                         Console.WriteLine("\nNOTAS");
-
                         for (int ñ = 0; ñ < nombres.Length; ñ++)
                         {
                             for (int t = 0; t < tabla.GetLength(0); t++)
@@ -179,7 +181,6 @@ namespace Ejer2Ev1
                                     verificar = true;
                                 }
                             }
-
                         }
                         if (verificar == false)
                         {
@@ -190,11 +191,10 @@ namespace Ejer2Ev1
                         int nMax = 0;
                         int nMin = 10;
                         bool verificar1 = false;
-                        string nombreBuscar2 = "";
+                        string nombreBuscar2;
                         Console.WriteLine("Introduzca el nombre que desea a buscar");
                         nombreBuscar2 = Console.ReadLine();
                         Console.WriteLine("\nNOTAS");
-
                         for (int ñ = 0; ñ < nombres.Length; ñ++)
                         {
                             for (int t = 0; t < tabla.GetLength(0); t++)
@@ -211,10 +211,8 @@ namespace Ejer2Ev1
                                     {
                                         nMin = n;
                                     }
-                                    //else if(nMin>n)
                                 }
                             }
-
                         }
                         if (verificar1 == false)
                         {
@@ -226,24 +224,20 @@ namespace Ejer2Ev1
                         }
                         break;
                     case 6:
+                        string[] al = Enum.GetNames(typeof(asignauras));
+                        const string FORMAT = "{0,-15}  {1,-15}  {2,-15}";
+                        Console.WriteLine(string.Format(FORMAT, "Asignatura", "Alumno", "Nota"));
+                        Console.WriteLine("--------------------------------------");
                         for (int v = 0; v < tabla.GetLength(0); v++)
                         {
                             for (int w = 0; w < tabla.GetLength(1); w++)
                             {
-                                Console.WriteLine(tabla[v, w]);
+                                Console.WriteLine(string.Format(FORMAT, al[v], nombres[w], tabla[v, w]));
                             }
                         }
                         break;
-                    case 7:
-
-                        break;
-
-
-
                 }
             } while (op != 7);
-
-
         }
     }
 }
