@@ -14,24 +14,21 @@ namespace Ejer3Ev1
     public partial class Form1 : Form
     {
         static bool verificar = false;
-
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        public void funcion()
         {
             List<string> alm = new List<string>();
 
             string ruta = txtDirectorio.Text;
             txtArchivo.Text = "";
-
             try
             {
                 Directory.SetCurrentDirectory(ruta);
                 verificar = true;
-
             }
             catch (ArgumentException)
             {
@@ -44,45 +41,40 @@ namespace Ejer3Ev1
             if (verificar)
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-
                 foreach (DirectoryInfo directoryInfo1 in directoryInfo.GetDirectories())
                 {
                     txtSubDirectorio.Text += directoryInfo1 + "\n";
                 }
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                 {
-                    //Si no pone nada mostramos todo
+                    //Si no pone nada mostramos todo tipo de archivos
                     if (txtExtensión.Text == "")
                     {
                         txtArchivo.Text += fileInfo + "\n";
                     }
                     else
                     {
-                        string[] almacen = new string[directoryInfo.GetFiles().Length];
-
                         alm.Add(fileInfo.Name);
-
-                        //Pongo mayor que 1 porque siempre añade el actual pero no lo muestra y me parecio la manera de solventar el problema lo mas rápido
-                        if (alm.Count > 1)
+                        for (int i = 0; i < alm.Count; i++)
                         {
-                            for (int i = 0; i < alm.Count; i++)
+                            if (alm[i].Split('.')[1] == txtExtensión.Text)
                             {
-                                if (alm[i].Split('.')[1] == txtExtensión.Text)//{
-                                    txtArchivo.Text += fileInfo + "\n";
+                                txtArchivo.Text += fileInfo + "\n";
                             }
                         }
-                        else
-                        {
-
-                            MessageBox.Show("Introuzca una extension valida");
-                        }
-
                     }
-
                 }
-
-
-
+            }
+        }
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            funcion();
+        }
+        private void TxtDirectorio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                funcion();
             }
         }
     }

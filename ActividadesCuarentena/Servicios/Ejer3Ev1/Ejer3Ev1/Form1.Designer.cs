@@ -46,6 +46,7 @@
             this.txtDirectorio.Name = "txtDirectorio";
             this.txtDirectorio.Size = new System.Drawing.Size(141, 22);
             this.txtDirectorio.TabIndex = 0;
+            this.txtDirectorio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtDirectorio_KeyDown);
             // 
             // label1
             // 
