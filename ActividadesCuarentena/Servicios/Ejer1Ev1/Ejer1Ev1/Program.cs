@@ -33,11 +33,9 @@ namespace Ejer1Ev1
                     }
                     catch (FormatException)
                     {
-                        Console.WriteLine("Introduzca números no letras");
                     }
                     catch (OverflowException)
                     {
-                        Console.WriteLine("Introduzca un número valido entre el 1 y el 5");
                     }
                 } while (apuesta < 1 || apuesta > 5);
 
@@ -66,7 +64,7 @@ namespace Ejer1Ev1
                     else
                     {
                         Console.SetCursorPosition(1, 23);
-                        Console.Write(apuesta + " HAS PERDIDO EL GANADOR ES EL NUMERO " + ganador + "\n");
+                        Console.Write("HAS PERDIDO EL GANADOR ES EL NUMERO " + ganador + "\n");
                     }
                     bool band = false;
                     do
@@ -114,7 +112,6 @@ namespace Ejer1Ev1
             Thread.Sleep(4000);
             //Pasados los 4 segundos se vuelve a poner normal
             banderas[aleatorio] = true;
-
         }
 
         static void caballos(object caballo)
