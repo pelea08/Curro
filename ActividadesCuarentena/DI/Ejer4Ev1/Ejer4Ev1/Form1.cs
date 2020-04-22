@@ -17,7 +17,6 @@ namespace Ejer4Ev1
         {
             InitializeComponent();
         }
-
         public void cordenadas(object sender, MouseEventArgs e)
         {
 
