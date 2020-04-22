@@ -14,6 +14,8 @@ namespace Ejer3Ev1
     public partial class Form1 : Form
     {
         static bool verificar = false;
+        static bool encontrado = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace Ejer3Ev1
 
             string ruta = txtDirectorio.Text;
             txtArchivo.Text = "";
+            txtSubDirectorio.Text = "";
             try
             {
                 Directory.SetCurrentDirectory(ruta);
@@ -40,6 +43,7 @@ namespace Ejer3Ev1
             }
             if (verificar)
             {
+                alm = new List<string>();
                 DirectoryInfo directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
                 foreach (DirectoryInfo directoryInfo1 in directoryInfo.GetDirectories())
                 {
@@ -55,15 +59,30 @@ namespace Ejer3Ev1
                     else
                     {
                         alm.Add(fileInfo.Name);
+
                         for (int i = 0; i < alm.Count; i++)
                         {
                             if (alm[i].Split('.')[1] == txtExtensión.Text)
                             {
-                                txtArchivo.Text += fileInfo + "\n";
+                                if (fileInfo.Name == alm[i])
+                                {
+                                    txtArchivo.Text += fileInfo.Name + "\n";
+                                    encontrado = true;
+                                }
                             }
                         }
                     }
                 }
+                if (txtExtensión.Text != "")
+                {
+
+                    if (!encontrado)
+                    {
+                        MessageBox.Show("En ese directorio no dispones de ningun archivo con la extension: " + txtExtensión.Text);
+                    }
+                }
+
+
             }
         }
         private void Button1_Click(object sender, EventArgs e)

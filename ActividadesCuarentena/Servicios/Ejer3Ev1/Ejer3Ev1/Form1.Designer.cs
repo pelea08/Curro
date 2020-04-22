@@ -115,6 +115,7 @@
             // txtExtensión
             // 
             this.txtExtensión.Location = new System.Drawing.Point(653, 73);
+            this.txtExtensión.MaxLength = 3;
             this.txtExtensión.Name = "txtExtensión";
             this.txtExtensión.Size = new System.Drawing.Size(100, 22);
             this.txtExtensión.TabIndex = 8;
