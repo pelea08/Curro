@@ -37,7 +37,7 @@ namespace Ejer4Ev1
                         nAleatorio = r.Next(1, 11);
                         nAleDormir = r.Next(99, 100 * nAleatorio);
                         Console.SetCursorPosition(5, (int)a);
-                        Console.WriteLine(nAleatorio);
+                        Console.WriteLine("{0,2}", nAleatorio);
                     }
                 }
                 Thread.Sleep(nAleDormir);

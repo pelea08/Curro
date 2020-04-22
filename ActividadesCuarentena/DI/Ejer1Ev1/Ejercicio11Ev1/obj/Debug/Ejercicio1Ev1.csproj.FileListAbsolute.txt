@@ -15,3 +15,6 @@ C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio
 C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\obj\Debug\Ejercicio1Ev1.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\obj\Debug\Ejercicio11Ev1.exe
 C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\obj\Debug\Ejercicio11Ev1.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\bin\Debug\Ejercicio11Ev1.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\bin\Debug\Ejercicio11Ev1.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer1Ev1\Ejercicio11Ev1\bin\Debug\Ejercicio11Ev1.pdb
