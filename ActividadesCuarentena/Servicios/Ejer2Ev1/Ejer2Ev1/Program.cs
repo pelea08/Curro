@@ -43,43 +43,72 @@ namespace Ejer2Ev1
                             }
                             break;
                         case 2:
-                            int proceso;
+                            int proceso = 0;
+                            bool verificar = false;
                             do
                             {
+
                                 Console.WriteLine("Introduzca un numero de proceso");
                                 proceso = Convert.ToInt32(Console.ReadLine());
+                                try
+                                {
+                                    Process p = Process.GetProcessById(proceso);
+                                    ProcessModule processModule = p.MainModule;
+                                    Console.WriteLine("Name: " + p.ProcessName + " Hora de Comienzo: " + p.StartTime + " ID: " + p.Id + " Titulo Ventana: " + p.MainWindowTitle + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
+                                    verificar = true;
+                                }
+                                catch (ArgumentException)
+                                {
+                                    Console.WriteLine("Numero de proceso incorrecto");
+                                    verificar = false;
+                                }
 
-                            } while (proceso < 0 || proceso > 65555);
-
-                            Process p = Process.GetProcessById(proceso);
-                            //OJO EXCEPCION WIN 32
-                            ProcessModule processModule = p.MainModule;
-                            Console.WriteLine("Name: " + p.ProcessName + " Hora de Comienzo: " + p.StartTime + " ID: " + p.Id + " Titulo Ventana: " + p.MainWindowTitle + " Nombre Modulo: " + processModule.ModuleName + " Nombre del archivo: " + processModule.FileName);
+                            } while (proceso < 0 || proceso > 65555 || !verificar);
                             break;
                         case 3:
+
                             int proceso2;
                             do
                             {
                                 Console.WriteLine("Introduzca un numero de proceso");
                                 proceso2 = Convert.ToInt32(Console.ReadLine());
 
+                                try
+                                {
+                                    Process p2 = Process.GetProcessById(proceso2);
+                                    p2.CloseMainWindow();
+                                    Console.WriteLine("Se ha cerrado correctamente");
+                                }
+                                catch (ArgumentException)
+                                {
+                                    Console.WriteLine("Numero de proceso incorrecto");
+                                }
                             } while (proceso2 < 0 || proceso2 > 65555);
-                            Process p2 = Process.GetProcessById(proceso2);
-                            p2.CloseMainWindow();
-                            Console.WriteLine("Se ha cerrado correctamente");
+
 
                             break;
                         case 4:
-                            int proceso1;
+                            int proceso1 = 0;
                             do
                             {
-                                Console.WriteLine("Introduzca un numero de proceso");
-                                proceso1 = Convert.ToInt32(Console.ReadLine());
+                                try
+                                {
+                                    Console.WriteLine("Introduzca un numero de proceso");
+                                    proceso1 = Convert.ToInt32(Console.ReadLine());
+
+                                    Process p1 = Process.GetProcessById(proceso1);
+                                    p1.Kill();
+                                    Console.WriteLine("Se ha cerrado correctamente");
+
+                                }
+                                catch (ArgumentException)
+                                {
+                                    Console.WriteLine("Numero de proceso incorrecto");
+
+                                }
 
                             } while (proceso1 < 0 || proceso1 > 65555);
-                            Process p1 = Process.GetProcessById(proceso1);
-                            p1.Kill();
-                            Console.WriteLine("Se ha cerrado correctamente");
+
                             break;
 
                         case 5:
@@ -90,17 +119,34 @@ namespace Ejer2Ev1
 
                             break;
                         case 6:
-                            Console.WriteLine("Introduzca una ruta para guardar el archivo");
-                            ruta = Console.ReadLine();
-                            using (StreamWriter sw = new StreamWriter(ruta))
-                            {
-                                Process[] processes2 = Process.GetProcesses();
-                                foreach (Process process in processes2)
-                                {
-                                    sw.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
-                                }
+                            bool banderaArchivo = false;
 
-                            }
+                            do
+                            {
+                                Console.WriteLine("Introduzca una ruta para guardar el archivo");
+                                ruta = Console.ReadLine();
+                                FileInfo f = new FileInfo(ruta);
+                                try
+                                {
+                                    if (f.Length > 0)
+                                    {
+                                        using (StreamWriter sw = new StreamWriter(ruta))
+                                        {
+                                            Process[] processes2 = Process.GetProcesses();
+                                            foreach (Process process in processes2)
+                                            {
+                                                sw.WriteLine("Name: " + process.ProcessName + " ID: " + process.Id);
+                                                banderaArchivo = true;
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (FileNotFoundException)
+                                {
+                                    Console.WriteLine("Ruta incorrecta,introduzca una ruta valida de un archivo");
+                                    banderaArchivo = false;
+                                }
+                            } while (!banderaArchivo);
                             break;
                         case 7:
                             using (StreamReader sr = new StreamReader(ruta))
@@ -133,8 +179,6 @@ namespace Ejer2Ev1
                 {
                     Console.WriteLine("No hay archivo cargado");
                 }
-
-
             } while (op != 8);
 
             Console.ReadLine();
