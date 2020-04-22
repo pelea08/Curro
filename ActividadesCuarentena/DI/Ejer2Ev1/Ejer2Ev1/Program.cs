@@ -136,7 +136,7 @@ namespace Ejer2Ev1
                         }
                         else
                         {
-                            Console.WriteLine("Introduzca el nombre adecuado");
+                            Console.WriteLine("Ese alumno no existe");
                         }
                         break;
                     case 3:
@@ -161,7 +161,7 @@ namespace Ejer2Ev1
                         }
                         else
                         {
-                            Console.WriteLine("Intrduzca una asignatura valida");
+                            Console.WriteLine("Asignatura inexistente");
                         }
                         break;
                     case 4:
@@ -184,7 +184,7 @@ namespace Ejer2Ev1
                         }
                         if (verificar == false)
                         {
-                            Console.WriteLine("Introduzca un nombre correcto");
+                            Console.WriteLine("Ese alumno no existe");
                         }
                         break;
                     case 5:
