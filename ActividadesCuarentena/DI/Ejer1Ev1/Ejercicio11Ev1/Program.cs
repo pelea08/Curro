@@ -10,41 +10,16 @@ namespace Ejercicio11Ev1
 {
     class Program
     {
+        static List<Videojuegos> almacen = new List<Videojuegos>();
         static void Main(string[] args)
         {
             int op = 0;
             Videojuegos juegos;
-            List<Videojuegos> almacen = new List<Videojuegos>();
-
 #if DIRECTIVA
             almacen.Add(new Videojuegos("titulo 1", 2000, Videojuegos.Estilo.Estrategia, "Samsung"));
             almacen.Add(new Videojuegos("titulo 2", 2123, Videojuegos.Estilo.Deportivo, "CHUAN"));
             almacen.Add(new Videojuegos("titulo 3", 345, Videojuegos.Estilo.Videoaventuras, "TRRSS"));
 #endif
-            void visualizar()
-            {
-                for (int i = 0; i < almacen.Count; i++)
-                {
-                    int aux = i + 1;
-                    Console.WriteLine("Posición: " + aux + "Titulo: " + almacen[i].Titulo + " Estilo: " + almacen[i].Tipojuego + " Fabricante: " + almacen[i].Fabricante + " Año: " + almacen[i].Año);
-                }
-            }
-            void visualizarFormateado()
-            {
-                const string FORMAT = "{0,-15}  {1,-15}  {2,-15}  {3,-15} {4,-15}";
-                Console.WriteLine(string.Format(FORMAT, "Posición", "Titulo", "Tipo", "Fabricante", "Año"));
-                for (int i = 0; i < almacen.Count; i++)
-                {
-                    int aux = i + 1;
-                    Console.WriteLine(string.Format(FORMAT, aux, almacen[i].Titulo, almacen[i].Tipojuego, almacen[i].Fabricante, almacen[i].Año));
-                    if (aux % 10 == 0)
-                    {
-                        Console.WriteLine("Pulse para continuar");
-                        Console.ReadLine();
-                    }
-                }
-            }
-
             do
             {
                 Console.WriteLine("---------------------");
@@ -56,7 +31,6 @@ namespace Ejercicio11Ev1
                 Console.WriteLine("6-Modificación Videojuego");
                 Console.WriteLine("7-Borrar Todos");
                 Console.WriteLine("8-Salir");
-
                 Console.WriteLine("Selecione Una Opcion");
                 try
                 {
@@ -221,6 +195,28 @@ namespace Ejercicio11Ev1
             Console.ReadLine();
 
         }
-
+        public static void visualizar()
+        {
+            for (int i = 0; i < almacen.Count; i++)
+            {
+                int aux = i + 1;
+                Console.WriteLine("Posición: " + aux + "Titulo: " + almacen[i].Titulo + " Estilo: " + almacen[i].Tipojuego + " Fabricante: " + almacen[i].Fabricante + " Año: " + almacen[i].Año);
+            }
+        }
+        public static void visualizarFormateado()
+        {
+            const string FORMAT = "{0,-15}  {1,-15}  {2,-15}  {3,-15} {4,-15}";
+            Console.WriteLine(string.Format(FORMAT, "Posición", "Titulo", "Tipo", "Fabricante", "Año"));
+            for (int i = 0; i < almacen.Count; i++)
+            {
+                int aux = i + 1;
+                Console.WriteLine(string.Format(FORMAT, aux, almacen[i].Titulo, almacen[i].Tipojuego, almacen[i].Fabricante, almacen[i].Año));
+                if (aux % 10 == 0)
+                {
+                    Console.WriteLine("Pulse para continuar");
+                    Console.ReadLine();
+                }
+            }
+        }
     }
 }
