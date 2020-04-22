@@ -46,7 +46,6 @@ namespace Ejer3Ev1
                 if (Convert.ToInt32(textBox1.Text) > -1 && Convert.ToInt32(textBox1.Text) < 256 && Convert.ToInt32(textBox2.Text) > -1 && Convert.ToInt32(textBox2.Text) < 256 && Convert.ToInt32(textBox3.Text) > -1 && Convert.ToInt32(textBox3.Text) < 256)
                 {
                     this.BackColor = Color.FromArgb(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text));
-
                 }
                 else
                 {
@@ -57,12 +56,10 @@ namespace Ejer3Ev1
             {
                 MessageBox.Show("Introduzca números entre el 0 y el 255 en las casillas");
             }
-
         }
         private void Button2_Click(object sender, EventArgs e)
         {
             colores();
-
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -82,10 +79,8 @@ namespace Ejer3Ev1
                 {
                     MessageBox.Show("Introduzca una ruta correcta");
                 }
-
             }
         }
-
         private void Button2_MouseEnter(object sender, EventArgs e)
         {
             button2.BackColor = Color.Yellow;
@@ -116,28 +111,26 @@ namespace Ejer3Ev1
             button1.BackColor = Color.Cyan;
         }
 
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        public void coloresEnter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 colores();
             }
+        }
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            coloresEnter(sender, e);
         }
 
         private void TextBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                colores();
-            }
+            coloresEnter(sender, e);
         }
 
         private void TextBox3_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                colores();
-            }
+            coloresEnter(sender, e);
         }
     }
 }
