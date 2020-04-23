@@ -44,6 +44,7 @@
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button1.Location = new System.Drawing.Point(188, 340);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -51,8 +52,8 @@
             this.button1.Text = "Salir";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.Button1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.Button1_MouseLeave);
+            this.button1.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // textBox1
             // 
@@ -61,7 +62,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox1_KeyDown);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             // 
             // textBox2
             // 
@@ -70,7 +71,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 2;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox2_KeyDown);
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             // 
             // textBox3
             // 
@@ -79,7 +80,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 3;
-            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox3_KeyDown);
+            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             // 
             // button2
             // 
@@ -90,8 +91,8 @@
             this.button2.Text = "Color";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button2.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            this.button2.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button2.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // label1
             // 
@@ -145,14 +146,15 @@
             this.button3.Text = "Cargar Imágen";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.Button3_MouseEnter);
-            this.button3.MouseLeave += new System.EventHandler(this.Button3_MouseLeave);
+            this.button3.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button3.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CancelButton = this.button1;
             this.ClientSize = new System.Drawing.Size(476, 375);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox4);
@@ -176,6 +178,8 @@
             this.Text = "Ejercicio 3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             this.ResumeLayout(false);
             this.PerformLayout();
 
