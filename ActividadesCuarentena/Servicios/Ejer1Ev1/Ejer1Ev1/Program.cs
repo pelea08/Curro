@@ -15,7 +15,6 @@ namespace Ejer1Ev1
         static int apuesta;
         static bool[] banderas = new bool[5];
         static Random r = new Random();
-        static int distanciaAleatoria = r.Next(1, 10);
 
         static void Main(string[] args)
         {
@@ -109,15 +108,17 @@ namespace Ejer1Ev1
                 Console.SetCursorPosition(1, 17);
                 Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
             }
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
             //Pasados los 4 segundos se vuelve a poner normal
             banderas[aleatorio] = true;
         }
 
         static void caballos(object caballo)
         {
-            int dormirAleatorio = r.Next(1000, 2000);
+            int dormirAleatorio = r.Next(100, 501);
             int i = 1;
+            int distanciaAleatoria = r.Next(1, 4);
+
             while (!finalizacion)
             {
                 int caballoActual = (int)caballo + 1;
