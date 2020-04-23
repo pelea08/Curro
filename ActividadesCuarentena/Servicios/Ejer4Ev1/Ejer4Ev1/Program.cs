@@ -13,6 +13,7 @@ namespace Ejer4Ev1
         static readonly object l = new object();
         static Random r = new Random();
         static int nAleatorio;
+        static int contadorComun = 0;
 
         static int nAleDormir;
         static void Main(string[] args)
@@ -24,10 +25,18 @@ namespace Ejer4Ev1
             player2.Start(20);
 
             //Thread display;
+
+            Console.ReadLine();
+        }
+        static void barra()
+        {
+            Console.SetCursorPosition(1, 15);
+            string[] simbolo = { "|", "/", "-", "\\" };
+
+
         }
         static void numeroAleatorios(object a)
         {
-            //int nAleDormir = r.Next(99, 100 * nAleatorio);
             while (!finalizar)
             {
                 lock (l)
@@ -35,9 +44,33 @@ namespace Ejer4Ev1
                     if (!finalizar)
                     {
                         nAleatorio = r.Next(1, 11);
-                        nAleDormir = r.Next(99, 100 * nAleatorio);
+                        nAleDormir = r.Next(100, 101 * nAleatorio);
                         Console.SetCursorPosition(5, (int)a);
                         Console.WriteLine("{0,2}", nAleatorio);
+                        if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7)
+                        {
+                            contadorComun += 1;
+
+                        }
+                        if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7)
+                        {
+                            contadorComun -= 1;
+
+                        }
+                        if ((int)a == 1 && contadorComun > 14)
+                        {
+                            Console.SetCursorPosition(1, 25);
+                            Console.WriteLine("Gano el jugador 1");
+                            finalizar = true;
+
+                        }
+                        if ((int)a == 20 && contadorComun < -14)
+                        {
+                            Console.SetCursorPosition(1, 25);
+                            Console.WriteLine("Gano el jugador 2");
+                            finalizar = true;
+
+                        }
                     }
                 }
                 Thread.Sleep(nAleDormir);

@@ -38,8 +38,6 @@ namespace Ejercicio11Ev1
                     switch (op)
                     {
                         case 1:
-                            bool evitarRepeticion = false;
-                            bool banderaAño = false;
                             String titulo, fabricante;
                             int año = 0;
                             int estilo = 0;
@@ -47,48 +45,8 @@ namespace Ejercicio11Ev1
                             titulo = Console.ReadLine();
                             Console.WriteLine("Introduzca el fabricante");
                             fabricante = Console.ReadLine();
-                            do
-                            {
-                                try
-                                {
-                                    Console.WriteLine("Introduzca el año");
-                                    año = Convert.ToInt32(Console.ReadLine());
-                                    banderaAño = false;
-                                }
-                                catch (FormatException)
-                                {
-                                    Console.WriteLine("Introduce un año entre el 1958 y el 2020");
-                                    banderaAño = true;
-                                }
-                                catch (OverflowException)
-                                {
-                                    Console.WriteLine("Introduce un año entre el 1958 y el 2020");
-                                    banderaAño = true;
-                                    evitarRepeticion = true;
-                                }
-                                if (!evitarRepeticion)
-                                {
-                                    if (año < 1958 || año > 2020)
-                                    {
-                                        Console.WriteLine("El año  tiene que ser entre el 1958 y el 2020");
-                                    }
-                                }
-                            } while (año < 1958 || año > 2020 || banderaAño);
-                            bool banderaEstilo = false;
-                            do
-                            {
-                                try
-                                {
-                                    Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
-                                    estilo = Convert.ToInt32(Console.ReadLine());
-                                    banderaEstilo = true;
-                                }
-                                catch (FormatException)
-                                {
-                                    Console.WriteLine("Introduzca los numeros adecuados");
-                                    banderaEstilo = false;
-                                }
-                            } while (estilo > 5 || estilo < 1 || !banderaEstilo);
+                            funcionAño(año);
+                            funcionEstilo(estilo);
                             int siNo = 0;
                             bool banderaIntroducir = false;
                             do
@@ -168,32 +126,11 @@ namespace Ejercicio11Ev1
                             break;
                         case 5:
                             bool sinResultados = false;
-                            int añoo;
+                            int añoo = 0;
                             int estiloo = 0;
-                            do
-                            {
-                                Console.WriteLine("Introduzca un año determinado");
-                                añoo = Convert.ToInt32(Console.ReadLine());
-                                if (añoo < 1958 || añoo > 2020)
-                                {
-                                    Console.WriteLine("Introduce un año entre el 1958 y el 2020");
-                                }
-                            } while (añoo < 1958 || añoo > 2020);
-                            bool banderaEstilo2 = false;
-                            do
-                            {
-                                try
-                                {
-                                    Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
-                                    estiloo = Convert.ToInt32(Console.ReadLine());
-                                    banderaEstilo2 = true;
-                                }
-                                catch (FormatException)
-                                {
-                                    Console.WriteLine("Introduzca los numeros adecuados");
-                                    banderaEstilo2 = false;
-                                }
-                            } while (estiloo > 5 || estiloo < 1 || !banderaEstilo2);
+                            funcionAño(añoo);
+                            funcionEstilo(estiloo);
+
                             for (int i = 0; i < almacen.Count; i++)
                             {
                                 if (almacen[i].Año == añoo && almacen[i].Tipojuego == (Videojuegos.Estilo)estiloo - 1)
@@ -226,51 +163,14 @@ namespace Ejercicio11Ev1
                                         Console.WriteLine("Introduzca un nuevo titulo");
                                         tituloNew = Console.ReadLine();
                                         int añoNew = 0;
-                                        bool verificarAño = false;
-                                        do
-                                        {
-                                            try
-                                            {
-                                                Console.WriteLine("Inserte un año nuevo comprendidio entre el 1958 y 2020");
-                                                añoNew = Convert.ToInt32(Console.ReadLine());
-                                                verificarAño = true;
-                                            }
-                                            catch (FormatException)
-                                            {
-                                                Console.WriteLine("Introduce un año entre el 1958 y el 2020");
-                                                verificarAño = false;
-                                            }
-                                            catch (OverflowException)
-                                            {
-                                                Console.WriteLine("Introduce un año entre el 1958 y el 2020");
-                                                verificarAño = false;
-                                            }
-                                        } while (añoNew < 1958 || añoNew > 2020 || !verificarAño);
+                                        funcionAño(añoNew);
+
                                         string fabricanteNew;
                                         Console.WriteLine("Introduce nuevo fabricante");
                                         fabricanteNew = Console.ReadLine();
                                         int estiloNew = 0;
-                                        bool banderaEstilo1 = false;
-                                        do
-                                        {
-                                            try
-                                            {
-                                                Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
-                                                estiloNew = Convert.ToInt32(Console.ReadLine());
-                                                banderaEstilo1 = true;
-                                            }
-                                            catch (FormatException)
-                                            {
-                                                Console.WriteLine("Introduzca el número adecuado del 1 al 5");
-                                                banderaEstilo1 = false;
-                                            }
-                                            catch (OverflowException)
-                                            {
-                                                Console.WriteLine("Introduzca el número adecuado del 1 al 5");
-                                                banderaEstilo1 = false;
-                                            }
 
-                                        } while (estiloNew > 5 || estiloNew < 1 || !banderaEstilo1);
+                                        funcionEstilo(estiloNew);
 
                                         int estiloNewDefinitivo = estiloNew - 1;
                                         almacen[i].Titulo = tituloNew;
@@ -330,7 +230,6 @@ namespace Ejercicio11Ev1
                 {
                     Console.WriteLine("Introduzca una opcion valida");
                 }
-
             } while (op != 8);
 
             Console.ReadLine();
@@ -358,6 +257,58 @@ namespace Ejercicio11Ev1
                     Console.ReadLine();
                 }
             }
+        }
+        public static void funcionAño(int varAño)
+        {
+            bool evitarRepeticion = true;
+            bool banderaAño = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Introduzca el año");
+                    varAño = Convert.ToInt32(Console.ReadLine());
+                    banderaAño = false;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Introduce un año entre el 1958 y el 2020");
+                    banderaAño = true;
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Introduce un año entre el 1958 y el 2020");
+                    banderaAño = true;
+                    evitarRepeticion = true;
+                }
+                if (!evitarRepeticion)
+                {
+                    if (varAño < 1958 || varAño > 2020)
+                    {
+                        Console.WriteLine("El año  tiene que ser entre el 1958 y el 2020");
+                    }
+                }
+            } while (varAño < 1958 || varAño > 2020 || banderaAño);
+
+
+        }
+        public static void funcionEstilo(int estiloo)
+        {
+            bool banderaEstilo2;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Eliga la categoria 1-Arcade,2-Videoaventura,3-Shootemup,4-Estrategia,5-Deportivo");
+                    estiloo = Convert.ToInt32(Console.ReadLine());
+                    banderaEstilo2 = true;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Introduzca los numeros adecuados");
+                    banderaEstilo2 = false;
+                }
+            } while (estiloo > 5 || estiloo < 1 || !banderaEstilo2);
         }
     }
 }
