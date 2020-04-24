@@ -35,7 +35,7 @@ namespace Ejer5Ev1
             Console.ReadKey();
 
             finalizacion = false;
-            Console.SetCursorPosition(1, 20);
+            //Console.SetCursorPosition(1, 25);
             Console.WriteLine("El ultimo valor del stock es " + stock);
             Console.ReadKey();
         }
@@ -45,7 +45,6 @@ namespace Ejer5Ev1
             {
                 Monitor.Wait(l);
                 stock += 100;
-                Console.SetCursorPosition(1, 20);
                 Console.WriteLine("--------> Se ha aumentado el stock en 100 unidades, en total hay" + stock + " <--------");
             }
         }
@@ -59,21 +58,18 @@ namespace Ejer5Ev1
                 {
                     if (stock <= 0)
                     {
-                        Console.SetCursorPosition(1, 15);
                         Console.WriteLine((string)nombre + " no puede cargar por falta de stock avisa y se va");
                         Monitor.Pulse(l);
                     }
                     if (aleatorio == 0)
                     {
                         stock -= 50;
-                        Console.SetCursorPosition(1, 5);
-                        Console.WriteLine((string)nombre + " ha quitado 50 unidades, quedan" + stock + " en el almacén");
+                        Console.WriteLine((string)nombre + " ha quitado 50 unidades, quedan" + stock + " en el almacen");
                     }
                     else
                     {
                         stock += 50;
-                        Console.SetCursorPosition(1, 10);
-                        Console.WriteLine((string)nombre + " ha  agregado 50 unidades, quedan" + stock + " en el almacén");
+                        Console.WriteLine((string)nombre + " ha  agregado 50 unidades, quedan" + stock + " en el almacen");
                     }
                     if (stock < 1)
                     {

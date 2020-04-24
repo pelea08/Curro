@@ -17,6 +17,8 @@ namespace Ejer5Ev1B
             int op = 0;
 
             Proceso opp = new Proceso(listaProcesos);
+            Proceso opp1 = new Proceso(dlls);
+            Proceso opp2 = new Proceso(cierreProceso);
             do
             {
                 Console.WriteLine("-----------------------");
@@ -35,8 +37,23 @@ namespace Ejer5Ev1B
                             Console.WriteLine("Introduce una prioridad");
                             prioridad = Convert.ToInt32(Console.ReadLine());
                             opp(prioridad);
+                            //                            Curro Profesor, [24.04.20 11:36]
+                            //En el cada case del switch simplemente haces
+
+                            //Curro Profesor, [24.04.20 11:36]
+                            //delegado = funcionAEjecutar
+
+                            //Curro Profesor, [24.04.20 11:36]
+                            //y al final ejecutas el delegado
+
+                            //Curro Profesor, [24.04.20 11:37]
+                            //Si no lo ves bien repasa primero los ejercicios de delegados que hicimos a principio de curso que te pueden venir bien
+
+                            //Curro Profesor, [24.04.20 11:37]
+                            //El del menú y el de las operaciones
 
 
+                        }
                         catch (FormatException)
                         {
                             Console.WriteLine("Introduce números");
@@ -52,7 +69,8 @@ namespace Ejer5Ev1B
                             int pid;
                             Console.WriteLine("Introduce un pid");
                             pid = Convert.ToInt32(Console.ReadLine());
-                            dlls(pid);
+                            //dlls(pid);
+                            opp1(pid);
                         }
                         catch (FormatException)
                         {
@@ -70,8 +88,9 @@ namespace Ejer5Ev1B
                             int pid;
                             Console.WriteLine("Introduce un pid");
                             pid = Convert.ToInt32(Console.ReadLine());
-                            Process p = Process.GetProcessById(pid);
-                            p.Kill();
+                            //Process p = Process.GetProcessById(pid);
+                            //p.Kill();
+                            opp2(pid);
                         }
                         catch (FormatException)
                         {
@@ -82,12 +101,6 @@ namespace Ejer5Ev1B
                             Console.WriteLine("Introduce un ´numero adecuado");
                         }
                         break;
-
-
-
-
-
-
                 }
             } while (op != 4);
         }
