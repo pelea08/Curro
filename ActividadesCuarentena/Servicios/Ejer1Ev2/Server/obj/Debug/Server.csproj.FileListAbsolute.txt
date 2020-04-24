@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\bin\Debug\Server.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\bin\Debug\Server.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\bin\Debug\Server.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\obj\Debug\Server.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev2\Server\obj\Debug\Server.pdb
