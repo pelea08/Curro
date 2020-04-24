@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\bin\Debug\Ejer5Ev1B.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\bin\Debug\Ejer5Ev1B.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\bin\Debug\Ejer5Ev1B.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\obj\Debug\Ejer5Ev1B.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\obj\Debug\Ejer5Ev1B.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\obj\Debug\Ejer5Ev1B.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer5Ev1\Ejer5Ev1B\obj\Debug\Ejer5Ev1B.pdb
