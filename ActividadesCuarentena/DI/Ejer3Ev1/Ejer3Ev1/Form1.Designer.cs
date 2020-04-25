@@ -52,7 +52,7 @@
             this.button1.Text = "Salir";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button1.MouseEnter += new System.EventHandler(this.coloresBotones);
             this.button1.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // textBox1
@@ -91,7 +91,7 @@
             this.button2.Text = "Color";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button2.MouseEnter += new System.EventHandler(this.coloresBotones);
             this.button2.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // label1
@@ -146,7 +146,7 @@
             this.button3.Text = "Cargar Imágen";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.button3.MouseEnter += new System.EventHandler(this.coloresBotones);
             this.button3.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             // 
             // Form1
@@ -177,6 +177,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ejercicio 3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);

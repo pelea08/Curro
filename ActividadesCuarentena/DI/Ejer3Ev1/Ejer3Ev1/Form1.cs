@@ -62,7 +62,10 @@ namespace Ejer3Ev1
         {
             colores();
         }
-
+        void coloresBotones(object sender, EventArgs e)
+        {
+            ((Button)sender).BackColor = (Color)((Button)sender).Tag;
+        }
         private void Button3_Click(object sender, EventArgs e)
         {
             if (textBox4.Text == "")
@@ -82,36 +85,18 @@ namespace Ejer3Ev1
                 }
             }
         }
-        private void Form1_MouseEnter(object sender, EventArgs e)
-        {
-            if (sender == button1)
-            {
-                button1.BackColor = Color.Red;
-            }
-            if (sender == button2)
-            {
-                button2.BackColor = Color.Blue;
-            }
-            if (sender == button3)
-            {
-                button3.BackColor = Color.Violet;
-            }
-        }
-
         private void Form1_MouseLeave(object sender, EventArgs e)
         {
-            if (sender == button1)
+            if (sender is Button)
             {
-                button1.BackColor = Color.Transparent;
+                ((Button)sender).BackColor = Color.Transparent;
             }
-            if (sender == button2)
-            {
-                button2.BackColor = Color.Transparent;
-            }
-            if (sender == button3)
-            {
-                button3.BackColor = Color.Transparent;
-            }
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button1.Tag = Color.Brown;
+            button2.Tag = Color.LawnGreen;
+            button3.Tag = Color.Red;
         }
     }
 }
