@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\bin\Debug\ignorar.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\bin\Debug\ignorar.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\bin\Debug\ignorar.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\obj\Debug\ignorar.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\obj\Debug\ignorar.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\obj\Debug\ignorar.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\Servicios\Ejer1Ev1\ignorar\obj\Debug\ignorar.pdb

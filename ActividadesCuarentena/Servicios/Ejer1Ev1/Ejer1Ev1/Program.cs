@@ -16,6 +16,9 @@ namespace Ejer1Ev1
         static bool[] banderas = new bool[5];
         static Random r = new Random();
         static int contadorSegundos = 0;
+        static int aleatorio;
+        static Random rr;
+        static bool banderasVerificar = false;
         static void Main(string[] args)
         {
             int repetir = 1;
@@ -42,7 +45,6 @@ namespace Ejer1Ev1
 
                 }
 
-
                 Console.Clear();
 
                 Thread[] conjuntoCaballos = new Thread[5];
@@ -55,7 +57,6 @@ namespace Ejer1Ev1
                     conjuntoCaballos[j].Start(j);
                 }
 
-                //Generar la aleatoriedad fuera ? y pasarla como paramentro n plan object 
                 Thread tropezar = new Thread(tropiezo);
                 tropezar.Start();
 
@@ -79,8 +80,11 @@ namespace Ejer1Ev1
                         {
                             Console.WriteLine("Desea volver a jugar 1-Si 2-No");
                             repetir = Convert.ToInt32(Console.ReadLine());
-                            Console.Clear();
                             band = false;
+                            if (repetir == 2)
+                            {
+                                Environment.Exit(0);
+                            }
                         }
                         catch (FormatException)
                         {
@@ -99,30 +103,25 @@ namespace Ejer1Ev1
             Console.ReadLine();
         }
 
-//        Aquí veo aun varia cosas raras: Primero es que tropiezo solo se ejecuta una vez(no hay bucle cada 2 segundos). El caballo no se vuelve a poner normal a los dos segundos, si no en el siguiente turno(el true no se gestiona en tropiezo si no en el caballo). 
-//Accedes a variables comnes sin lock.
-//Accedes a la consola sin lock, esto hace que aparezcan asetriscos en sitios raros.
+
         static void tropiezo()
         {
-            lock (l)
+            while (contadorSegundos % 1 == 0)
             {
-                for (int i = 0; i < banderas.Length; i++)
+                rr = new Random();
+                aleatorio = rr.Next(0, banderas.Length);
+
+                lock (l)
                 {
-                    banderas[i] = true;
+                    banderas[aleatorio] = false;
+
+                    Console.Clear();
+                    Console.SetCursorPosition(1, 17);
+                    Console.WriteLine("Se acaba de detener el caballo numero " + (aleatorio + 1));
                 }
+                Thread.Sleep(2000);
+                contadorSegundos++;
             }
-            Random rr = new Random();
-            int aleatorio = rr.Next(0, banderas.Length);
-            lock (l)
-            {
-                banderas[aleatorio] = false;
-                Console.SetCursorPosition(1, 17);
-                Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
-            }
-            Thread.Sleep(2000);
-            contadorSegundos++;
-            //Pasados los 2 segundos se vuelve a poner normal
-            //banderas[aleatorio] = true;
         }
 
         static void caballos(object caballo)
@@ -130,6 +129,15 @@ namespace Ejer1Ev1
             int dormirAleatorio = r.Next(100, 501);
             int i = 1;
             int distanciaAleatoria = r.Next(1, 4);
+
+            if (!banderasVerificar)
+            {
+                for (int k = 0; k < banderas.Length; k++)
+                {
+                    banderas[k] = true;
+                }
+                banderasVerificar = true;
+            }
 
             while (!finalizacion)
             {
@@ -145,7 +153,7 @@ namespace Ejer1Ev1
                         i += distanciaAleatoria;
                         Console.SetCursorPosition(i + 1, caballoActual);
                         Console.Write("*");
-                        banderas[(int)caballo] = true;
+                        banderas[aleatorio] = true;
 
                         if (i >= 50)
                         {
