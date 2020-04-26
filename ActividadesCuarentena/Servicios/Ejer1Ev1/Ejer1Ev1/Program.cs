@@ -15,28 +15,33 @@ namespace Ejer1Ev1
         static int apuesta;
         static bool[] banderas = new bool[5];
         static Random r = new Random();
-
+        static int contadorSegundos = 0;
         static void Main(string[] args)
         {
             int repetir = 1;
             while (repetir == 1)
             {
-                finalizacion = false;
-                repetir = 2;
-                do
+                lock (l)
                 {
-                    try
+                    finalizacion = false;
+                    repetir = 2;
+                    do
                     {
-                        Console.WriteLine("Apueste por un caballo del 1 al 5");
-                        apuesta = Convert.ToInt32(Console.ReadLine());
-                    }
-                    catch (FormatException)
-                    {
-                    }
-                    catch (OverflowException)
-                    {
-                    }
-                } while (apuesta < 1 || apuesta > 5);
+                        try
+                        {
+                            Console.WriteLine("Apueste por un caballo del 1 al 5");
+                            apuesta = Convert.ToInt32(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                        }
+                        catch (OverflowException)
+                        {
+                        }
+                    } while (apuesta < 1 || apuesta > 5);
+
+                }
+
 
                 Console.Clear();
 
@@ -49,6 +54,8 @@ namespace Ejer1Ev1
                 {
                     conjuntoCaballos[j].Start(j);
                 }
+
+                //Generar la aleatoriedad fuera ? y pasarla como paramentro n plan object 
                 Thread tropezar = new Thread(tropiezo);
                 tropezar.Start();
 
@@ -92,14 +99,18 @@ namespace Ejer1Ev1
             Console.ReadLine();
         }
 
+//        Aquí veo aun varia cosas raras: Primero es que tropiezo solo se ejecuta una vez(no hay bucle cada 2 segundos). El caballo no se vuelve a poner normal a los dos segundos, si no en el siguiente turno(el true no se gestiona en tropiezo si no en el caballo). 
+//Accedes a variables comnes sin lock.
+//Accedes a la consola sin lock, esto hace que aparezcan asetriscos en sitios raros.
         static void tropiezo()
         {
-            //Inicializamos todo a true
-            for (int i = 0; i < banderas.Length; i++)
+            lock (l)
             {
-                banderas[i] = true;
+                for (int i = 0; i < banderas.Length; i++)
+                {
+                    banderas[i] = true;
+                }
             }
-
             Random rr = new Random();
             int aleatorio = rr.Next(0, banderas.Length);
             lock (l)
@@ -109,8 +120,9 @@ namespace Ejer1Ev1
                 Console.WriteLine("Se acaba de detener el caballo numero" + (aleatorio + 1));
             }
             Thread.Sleep(2000);
-            //Pasados los 4 segundos se vuelve a poner normal
-            banderas[aleatorio] = true;
+            contadorSegundos++;
+            //Pasados los 2 segundos se vuelve a poner normal
+            //banderas[aleatorio] = true;
         }
 
         static void caballos(object caballo)
@@ -122,17 +134,18 @@ namespace Ejer1Ev1
             while (!finalizacion)
             {
                 int caballoActual = (int)caballo + 1;
-
-                Console.SetCursorPosition(i + 1, caballoActual);
-                Console.Write(" ");
                 lock (l)
                 {
+                    Console.SetCursorPosition(i + 1, caballoActual);
+                    Console.Write(" ");
+
                     int indiceBien = (int)caballo;
                     if (banderas[indiceBien])
                     {
                         i += distanciaAleatoria;
                         Console.SetCursorPosition(i + 1, caballoActual);
                         Console.Write("*");
+                        banderas[(int)caballo] = true;
 
                         if (i >= 50)
                         {
