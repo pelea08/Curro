@@ -22,6 +22,7 @@ namespace Ejer1Ev1
         static void Main(string[] args)
         {
             int repetir = 1;
+            bool verificar = false;
             while (repetir == 1)
             {
                 lock (l)
@@ -35,14 +36,17 @@ namespace Ejer1Ev1
                             Console.Clear();
                             Console.WriteLine("Apueste por un caballo del 1 al 5");
                             apuesta = Convert.ToInt32(Console.ReadLine());
+                            verificar = true;
                         }
                         catch (FormatException)
                         {
+                            verificar = false;
                         }
                         catch (OverflowException)
                         {
+                            verificar = false;
                         }
-                    } while (apuesta < 1 || apuesta > 5);
+                    } while (apuesta < 1 || apuesta > 5 || !verificar);
 
                 }
 
@@ -128,9 +132,7 @@ namespace Ejer1Ev1
 
         static void caballos(object caballo)
         {
-            int dormirAleatorio = r.Next(100, 501);
-            int i = 1;
-            int distanciaAleatoria = r.Next(1, 4);
+
 
             if (!banderasVerificar)
             {
@@ -140,9 +142,13 @@ namespace Ejer1Ev1
                 }
                 banderasVerificar = true;
             }
+            int i = 1;
 
             while (!finalizacion)
             {
+                int dormirAleatorio = r.Next(100, 501);
+                int distanciaAleatoria = r.Next(1, 4);
+
                 int caballoActual = (int)caballo + 1;
                 lock (l)
                 {
@@ -168,7 +174,7 @@ namespace Ejer1Ev1
                     else
                     {
                         banderas[aleatorio] = true;
-                        
+
                     }
                 }
                 Thread.Sleep(dormirAleatorio);

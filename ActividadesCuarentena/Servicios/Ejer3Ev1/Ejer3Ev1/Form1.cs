@@ -14,7 +14,7 @@ namespace Ejer3Ev1
     public partial class Form1 : Form
     {
         static bool verificar = false;
-        static bool encontrado = false;
+        static List<string> alm = new List<string>();
 
         public Form1()
         {
@@ -23,7 +23,7 @@ namespace Ejer3Ev1
 
         public void funcion()
         {
-            List<string> alm = new List<string>();
+            bool encontrado = false;
 
             string ruta = txtDirectorio.Text;
             txtArchivo.Text = "";
@@ -49,52 +49,35 @@ namespace Ejer3Ev1
                 {
                     txtSubDirectorio.Text += directoryInfo1 + "\n";
                 }
+
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                 {
-                    //Si no pone nada mostramos todo tipo de archivos
                     if (txtExtensión.Text == "")
                     {
                         txtArchivo.Text += fileInfo + "\n";
                     }
                     else
                     {
-                        alm.Add(fileInfo.Name);
-
-                        for (int i = 0; i < alm.Count; i++)
+                        if (fileInfo.Extension == "." + txtExtensión.Text)
                         {
-                            if (alm[i].Split('.')[1] == txtExtensión.Text)
-                            {
-                                if (fileInfo.Name == alm[i])
-                                {
-                                    txtArchivo.Text += fileInfo.Name + "\n";
-                                    encontrado = true;
-                                }
-                            }
+                            txtArchivo.Text += fileInfo.Name + "\n";
+                            encontrado = true;
                         }
                     }
                 }
                 if (txtExtensión.Text != "")
                 {
-
                     if (!encontrado)
                     {
                         MessageBox.Show("En ese directorio no dispones de ningun archivo con la extension: " + txtExtensión.Text);
                     }
                 }
 
-
             }
         }
         private void Button1_Click(object sender, EventArgs e)
         {
             funcion();
-        }
-        private void TxtDirectorio_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                funcion();
-            }
         }
     }
 }

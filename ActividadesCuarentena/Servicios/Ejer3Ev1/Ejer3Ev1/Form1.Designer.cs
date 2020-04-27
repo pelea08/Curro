@@ -46,7 +46,6 @@
             this.txtDirectorio.Name = "txtDirectorio";
             this.txtDirectorio.Size = new System.Drawing.Size(141, 22);
             this.txtDirectorio.TabIndex = 0;
-            this.txtDirectorio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtDirectorio_KeyDown);
             // 
             // label1
             // 
@@ -115,13 +114,14 @@
             // txtExtensión
             // 
             this.txtExtensión.Location = new System.Drawing.Point(653, 73);
-            this.txtExtensión.MaxLength = 3;
+            this.txtExtensión.MaxLength = 7;
             this.txtExtensión.Name = "txtExtensión";
             this.txtExtensión.Size = new System.Drawing.Size(100, 22);
             this.txtExtensión.TabIndex = 8;
             // 
             // Form1
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 281);
