@@ -37,6 +37,8 @@ namespace Ejer4Ev1
             {
                 lock (l)
                 {
+                    Monitor.Wait(l);
+
                     Console.SetCursorPosition(1, 15);
                     Console.Write(simbolo[i]);
                     i++;
@@ -45,6 +47,11 @@ namespace Ejer4Ev1
                     {
                         i = 0;
                     }
+                    //if (finalizar)
+                    //{
+                    //    lock (l)
+                    //        Monitor.Pulse(l);
+                    //}
                 }
                 Thread.Sleep(750);
             }
@@ -64,8 +71,8 @@ namespace Ejer4Ev1
                         if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7 && finalizarBarra)
                         {
                             contadorComun += 1;
+                            //Cuando esto pasa tienes que pausar la barra que gira
                             finalizarBarra = false;
-
                         }
                         else if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7 && !finalizarBarra)
                         {
@@ -74,7 +81,12 @@ namespace Ejer4Ev1
                         if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7)
                         {
                             contadorComun -= 1;
-
+                            //Cuando esto pasa tiene que guirar la barra
+                            lock (l)
+                            {
+                                finalizarBarra = true;
+                                Monitor.Pulse(l);
+                            }
                         }
                         else if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7 && finalizarBarra)
                         {
