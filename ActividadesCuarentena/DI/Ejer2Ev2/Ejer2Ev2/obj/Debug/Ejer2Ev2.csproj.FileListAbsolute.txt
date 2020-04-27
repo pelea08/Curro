@@ -1,0 +1,11 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\bin\Debug\Ejer2Ev2.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\bin\Debug\Ejer2Ev2.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\bin\Debug\Ejer2Ev2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.Form1.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.Form2.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer2Ev2\Ejer2Ev2\obj\Debug\Ejer2Ev2.pdb

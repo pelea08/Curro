@@ -32,6 +32,7 @@ namespace Ejer1Ev1
                     {
                         try
                         {
+                            Console.Clear();
                             Console.WriteLine("Apueste por un caballo del 1 al 5");
                             apuesta = Convert.ToInt32(Console.ReadLine());
                         }
@@ -110,14 +111,15 @@ namespace Ejer1Ev1
             {
                 rr = new Random();
                 aleatorio = rr.Next(0, banderas.Length);
-
                 lock (l)
                 {
-                    banderas[aleatorio] = false;
+                    if (banderas[aleatorio])
+                    {
+                        banderas[aleatorio] = false;
 
-                    Console.Clear();
-                    Console.SetCursorPosition(1, 17);
-                    Console.WriteLine("Se acaba de detener el caballo numero " + (aleatorio + 1));
+                        Console.SetCursorPosition(1, 17);
+                        Console.WriteLine("Se acaba de detener el caballo numero " + (aleatorio + 1));
+                    }
                 }
                 Thread.Sleep(2000);
                 contadorSegundos++;
@@ -144,23 +146,29 @@ namespace Ejer1Ev1
                 int caballoActual = (int)caballo + 1;
                 lock (l)
                 {
-                    Console.SetCursorPosition(i + 1, caballoActual);
-                    Console.Write(" ");
 
                     int indiceBien = (int)caballo;
                     if (banderas[indiceBien])
                     {
+                        Console.SetCursorPosition(i + 1, caballoActual);
+                        Console.Write(" ");
+
                         i += distanciaAleatoria;
                         Console.SetCursorPosition(i + 1, caballoActual);
                         Console.Write("*");
-                        banderas[aleatorio] = true;
 
                         if (i >= 50)
                         {
+
                             finalizacion = true;
                             ganador = caballoActual;
                             Monitor.Pulse(l);
                         }
+                    }
+                    else
+                    {
+                        banderas[aleatorio] = true;
+                        
                     }
                 }
                 Thread.Sleep(dormirAleatorio);

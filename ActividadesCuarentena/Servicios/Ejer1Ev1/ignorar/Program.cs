@@ -14,21 +14,24 @@ namespace ignorar
         {
             int cont = 0;
 
-            while (cont % 1 == 0)
-            {
-                lock (l)
-                {
-                    Console.WriteLine("pepe");
+            //while (cont % 1 == 0)
+            //{
+            //    lock (l)
+            //    {
+            //        Console.WriteLine("pepe");
 
-                }
-                Thread.Sleep(3000);
-                cont++;
-
-
+            //    }
+            //    Thread.Sleep(3000);
+            //    cont++;
 
 
 
-            }
+
+
+            //}
+            Random r = new Random();
+            int a = r.Next(2);
+            Console.WriteLine(""+a);
             Console.ReadLine();
         }
     }
