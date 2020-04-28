@@ -16,7 +16,6 @@ namespace Ejer2Ev2
         Form2 f = new Form2();
         Button btn;
         static bool banderaColor = false;
-        static bool colorDefecto = false;
 
 
         public Form1()
@@ -41,16 +40,12 @@ namespace Ejer2Ev2
                     btn.UseVisualStyleBackColor = true;
 
 
-                    btn.BackColor = Color.Transparent;
                     Controls.Add(btn);
                     btn.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
                     btn.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
                     btn.Click += new System.EventHandler(dibujarNumeros);
-                    if (!colorDefecto)
-                    {
-                        btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button1_MouseDown);
+                    btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button1_MouseDown);
 
-                    }
 
                     x += 42;
                     int div = i + 1;
@@ -76,11 +71,7 @@ namespace Ejer2Ev2
             else /*if (f.ShowDialog() == DialogResult.Cancel)*/
             {
                 this.Close();
-
             }
-
-
-
         }
         void dibujarNumeros(object sender, EventArgs e)
         {
@@ -91,20 +82,13 @@ namespace Ejer2Ev2
         {
             textBox1.Text = "";
             banderaColor = false;
-            //btn.BackColor = (Color)((Button)sender).Tag;
-            colorDefecto = true;
-           
-            if (sender == btn)
+            foreach (Control item in this.Controls)
             {
-                ((Button)sender).BackColor = Color.Transparent;
+                if (item is Button)
+                {
+                    ((Button)item).BackColor = Color.Transparent;
+                }
             }
-            btn.Refresh();
-
-
-        }
-
-        private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -128,7 +112,7 @@ namespace Ejer2Ev2
             {
                 if (sender is Button)
                 {
-                    ((Button)sender).BackColor = Color.Azure;
+                    ((Button)sender).BackColor = Color.Yellow;
                 }
             }
         }
@@ -142,11 +126,6 @@ namespace Ejer2Ev2
                     ((Button)sender).BackColor = Color.Transparent;
                 }
             }
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Button1_MouseDown(object sender, MouseEventArgs e)
@@ -163,14 +142,6 @@ namespace Ejer2Ev2
         private void AcercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Programa realizado por: Donald Knuth");
-        }
-
-        private void Button1_BackColorChanged(object sender, EventArgs e)
-        {
-            if (sender is Button)
-            {
-                ((Button)sender).BackColor = Color.Transparent;
-            }
         }
     }
 }
