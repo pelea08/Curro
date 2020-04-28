@@ -1,0 +1,6 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\bin\Debug\EtiquetaAviso.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\bin\Debug\EtiquetaAviso.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\obj\Debug\EtiquetaAviso.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\obj\Debug\EtiquetaAviso.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\obj\Debug\EtiquetaAviso.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\EtiquetaAviso\obj\Debug\EtiquetaAviso.pdb

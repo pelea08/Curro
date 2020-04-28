@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\bin\Debug\Ejer3Ev2.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\bin\Debug\Ejer3Ev2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\obj\Debug\Ejer3Ev2.LabelTextBox.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\obj\Debug\Ejer3Ev2.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\obj\Debug\Ejer3Ev2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\obj\Debug\Ejer3Ev2.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer3Ev2\Ejer3Ev2\obj\Debug\Ejer3Ev2.pdb
