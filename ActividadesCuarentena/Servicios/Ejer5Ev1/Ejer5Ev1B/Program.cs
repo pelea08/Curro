@@ -13,12 +13,9 @@ namespace Ejer5Ev1B
 
         static void Main(string[] args)
         {
-
             int op = 0;
+            Proceso[] opp = { new Proceso(listaProcesos), new Proceso(dlls), new Proceso(cierreProceso) };
 
-            Proceso opp = new Proceso(listaProcesos);
-            Proceso opp1 = new Proceso(dlls);
-            Proceso opp2 = new Proceso(cierreProceso);
             do
             {
                 Console.WriteLine("-----------------------");
@@ -36,23 +33,7 @@ namespace Ejer5Ev1B
                             int prioridad;
                             Console.WriteLine("Introduce una prioridad");
                             prioridad = Convert.ToInt32(Console.ReadLine());
-                            opp(prioridad);
-                            //                            Curro Profesor, [24.04.20 11:36]
-                            //En el cada case del switch simplemente haces
-
-                            //Curro Profesor, [24.04.20 11:36]
-                            //delegado = funcionAEjecutar
-
-                            //Curro Profesor, [24.04.20 11:36]
-                            //y al final ejecutas el delegado
-
-                            //Curro Profesor, [24.04.20 11:37]
-                            //Si no lo ves bien repasa primero los ejercicios de delegados que hicimos a principio de curso que te pueden venir bien
-
-                            //Curro Profesor, [24.04.20 11:37]
-                            //El del menú y el de las operaciones
-
-
+                            opp[0].Invoke(prioridad);
                         }
                         catch (FormatException)
                         {
@@ -64,47 +45,37 @@ namespace Ejer5Ev1B
                         }
                         break;
                     case 2:
-                        try
-                        {
-                            int pid;
-                            Console.WriteLine("Introduce un pid");
-                            pid = Convert.ToInt32(Console.ReadLine());
-                            //dlls(pid);
-                            opp1(pid);
-                        }
-                        catch (FormatException)
-                        {
-                            Console.WriteLine("Introduce números");
-                        }
-                        catch (OverflowException)
-                        {
-                            Console.WriteLine("Introduce un ´numero adecuado");
-                        }
-
+                        opp[1].Invoke(pidd());
                         break;
                     case 3:
-                        try
-                        {
-                            int pid;
-                            Console.WriteLine("Introduce un pid");
-                            pid = Convert.ToInt32(Console.ReadLine());
-                            //Process p = Process.GetProcessById(pid);
-                            //p.Kill();
-                            opp2(pid);
-                        }
-                        catch (FormatException)
-                        {
-                            Console.WriteLine("Introduce números");
-                        }
-                        catch (OverflowException)
-                        {
-                            Console.WriteLine("Introduce un ´numero adecuado");
-                        }
+                        opp[2].Invoke(pidd());
                         break;
                 }
             } while (op != 4);
         }
-        static void listaProcesos(int prioridad)
+
+        public static int pidd()
+        {
+            int pid = 0;
+
+            try
+            {
+                Console.WriteLine("Introduce un pid");
+                pid = Convert.ToInt32(Console.ReadLine());
+
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Introduce números");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Introduce un ´numero adecuado");
+            }
+            return pid;
+
+        }
+        public static void listaProcesos(int prioridad)
         {
             Process[] p = Process.GetProcesses();
             foreach (Process process in p)
@@ -118,7 +89,7 @@ namespace Ejer5Ev1B
 
 
         }
-        static void dlls(int pid)
+        public static void dlls(int pid)
         {
             try
             {
@@ -134,7 +105,7 @@ namespace Ejer5Ev1B
 
             }
         }
-        static void cierreProceso(int id)
+        public static void cierreProceso(int id)
         {
             Process p = Process.GetProcessById(id);
             p.CloseMainWindow();
