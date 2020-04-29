@@ -57,8 +57,8 @@
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(174, 116);
             this.listBox1.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.listBox1, "Esto es el listbox 1");
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
-            this.listBox1.MouseEnter += new System.EventHandler(this.ListBox1_MouseEnter);
             // 
             // listBox2
             // 
@@ -75,7 +75,7 @@
             this.listBox2.Size = new System.Drawing.Size(174, 116);
             this.listBox2.TabIndex = 1;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
-            this.listBox2.MouseEnter += new System.EventHandler(this.ListBox2_MouseEnter);
+            this.listBox2.SizeChanged += new System.EventHandler(this.ListBox2_SizeChanged);
             // 
             // button1
             // 
@@ -84,9 +84,9 @@
             this.button1.Size = new System.Drawing.Size(164, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Añadir";
+            this.toolTip1.SetToolTip(this.button1, "Añadir elementos");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.Button1_MouseEnter);
             // 
             // button2
             // 
@@ -95,9 +95,9 @@
             this.button2.Size = new System.Drawing.Size(164, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Quitar";
+            this.toolTip1.SetToolTip(this.button2, "Quita elementos a la lista");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
             // 
             // button3
             // 
@@ -106,9 +106,9 @@
             this.button3.Size = new System.Drawing.Size(164, 23);
             this.button3.TabIndex = 4;
             this.button3.Text = "Transpasar >";
+            this.toolTip1.SetToolTip(this.button3, "Pasa de la lista 1 a la lista 2");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.Button3_MouseEnter);
             // 
             // button4
             // 
@@ -117,9 +117,9 @@
             this.button4.Size = new System.Drawing.Size(164, 23);
             this.button4.TabIndex = 5;
             this.button4.Text = "< Transpasar";
+            this.toolTip1.SetToolTip(this.button4, "Pasa de la lista 2 a la lista 1");
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4_Click);
-            this.button4.MouseEnter += new System.EventHandler(this.Button4_MouseEnter);
             // 
             // textBox1
             // 
@@ -127,7 +127,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 6;
-            this.textBox1.MouseEnter += new System.EventHandler(this.TextBox1_MouseEnter);
+            this.toolTip1.SetToolTip(this.textBox1, "Son las palabras que inserta la listbox1");
             // 
             // lblIndice
             // 
@@ -153,7 +153,6 @@
             // toolTip1
             // 
             this.toolTip1.ShowAlways = true;
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.ToolTip1_Popup);
             // 
             // Form1
             // 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Ejer1Ev2
 {
@@ -21,79 +22,34 @@ namespace Ejer1Ev2
             InitializeComponent();
             lblElementos.Text = "Numero de elementos: " + listBox1.Items.Count;
         }
-
-        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            string[] titulo = { "E", "J", "E", "R", "C", "I", "C", "I", "O", " ", "1" };
+            string titulo1 = "Ejercicio 1";
             contador++;
             if (contador % 2 == 0)
             {
-                if (i == titulo.Length)
+                if (i == titulo1.Length)
                 {
                     i = 0;
                     this.Text = "";
                 }
-                this.Text += titulo[i];
+                this.Text += titulo1[i];
                 i++;
             }
             if (contador % 4 == 0)
             {
                 if (!bandera)
                 {
-                    this.Icon = new Icon("C:/Users/User/Downloads/a.ico");
+                    this.Icon = new Icon("a.ico");
                     bandera = true;
                 }
                 else
                 {
-                    this.Icon = new Icon("C:/Users/User/Downloads/b.ico");
+                    this.Icon = new Icon("b.ico");
                     bandera = false;
                 }
             }
         }
-        private void ToolTip1_Popup(object sender, PopupEventArgs e)
-        {
-
-        }
-
-        private void ListBox2_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(listBox2, "Elementos Restantes:" + listBox2.Items.Count);
-        }
-
-        private void ListBox1_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(listBox1, "Esto es el listbox 1");
-        }
-
-        private void Button1_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(button1, "Añade elementos a la lista");
-        }
-
-        private void Button2_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(button2, "Quita elementos a la lista");
-        }
-
-        private void Button3_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(button3, "Pasa de la lista 1 a la lista 2");
-        }
-
-        private void Button4_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(button4, "Pasa de la lista 2 a la lista 1");
-        }
-
-        private void TextBox1_MouseEnter(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(textBox1, "Son las palabras que inserta la listbox1");
-        }
-
         private void Button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != "")
@@ -114,7 +70,6 @@ namespace Ejer1Ev2
                 }
                 lblElementos.Text = "Numero de elementos: " + listBox1.Items.Count;
             }
-
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -137,20 +92,14 @@ namespace Ejer1Ev2
         {
             if (listBox2.Items.Count != 0)
             {
-
-                try
+                if (listBox2.SelectedItem != null)
                 {
                     string variable = listBox2.SelectedItem.ToString();
                     listBox2.Items.Remove(variable);
                     listBox1.Items.Add(variable);
                     lblElementos.Text = "Numero de elementos: " + listBox1.Items.Count;
                 }
-                catch (NullReferenceException)
-                {
-                }
-
             }
-
         }
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -158,5 +107,13 @@ namespace Ejer1Ev2
             lblIndice.Text = "Elemento Selecionado: " + listBox1.SelectedIndex;
 
         }
+
+        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(listBox2, "Elementos Restantes:" + listBox2.Items.Count);
+
+        }
+
     }
+
 }

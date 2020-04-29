@@ -46,29 +46,29 @@ namespace Ejer3Ev2
             foreach (Socket socket in almacenClientes)
             {
 
-                socket.Connect(ie);
+                //socket.Connect(ie);
 
                 using (NetworkStream ns = new NetworkStream(socket))
 
                 using (StreamWriter sw = new StreamWriter(ns))
                 using (StreamReader sr = new StreamReader(ns))
                 {
-                    while (finalizacion)
+                    //while (finalizacion)
+                    //{
+                    //Añadimos cada persona que entra para evitar repeticion mensaje
+                    lock (l)
                     {
-                        //Añadimos cada persona que entra para evitar repeticion mensaje
-                        lock (l)
+                        for (int i = 0; i < almacenStream.Count; i++)
                         {
-                            for (int i = 0; i < almacenStream.Count; i++)
+                            //Enviale el mensaje a todos menos a mi mismo
+                            if (almacenStream[i] != sw)
                             {
-                                //Enviale el mensaje a todos menos a mi mismo
-                                if (almacenStream[i] != sw)
-                                {
-                                    sw.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
-                                    sw.Flush();
-                                }
+                                sw.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
+                                sw.Flush();
                             }
                         }
                     }
+                    //}
 
                 }
             }
@@ -131,19 +131,20 @@ namespace Ejer3Ev2
                 almacenStream.Add(sw);
                 while (finalizacion)
                 {
-                    //lock (l)
-                    //{
-                    mensaje = sr.ReadLine();
-                    switch (mensaje)
+                    lock (l)
                     {
-                        case "MELARGO":
-                            cliente.Close();
-                            almacenStream.Remove(sw);
-                            break;
-                        default:
-                            envioMensaje(sr.ReadLine(), ie);
-                            break;
+                        mensaje = sr.ReadLine();
+                        switch (mensaje)
+                        {
+                            case "MELARGO":
+                                cliente.Close();
+                                almacenStream.Remove(sw);
+                                break;
+                            default:
+                                envioMensaje(mensaje, ie);
+                                break;
 
+                        }
                     }
                     //if (mensaje == "MELARGO")
                     //{
