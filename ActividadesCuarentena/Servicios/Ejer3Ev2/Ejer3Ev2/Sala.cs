@@ -45,7 +45,7 @@ namespace Ejer3Ev2
         {
             foreach (Socket socket in almacenClientes)
             {
-                
+
                 socket.Connect(ie);
 
                 using (NetworkStream ns = new NetworkStream(socket))
@@ -133,16 +133,28 @@ namespace Ejer3Ev2
                 {
                     //lock (l)
                     //{
-                    if (sr.ReadLine() == "MELARGO")
+                    mensaje = sr.ReadLine();
+                    switch (mensaje)
                     {
-                        cliente.Close();
-                        almacenStream.Remove(sw);
-                    }
-                    else if (sr.ReadLine() != "")
-                    {
-                        envioMensaje(sr.ReadLine(), ie);
+                        case "MELARGO":
+                            cliente.Close();
+                            almacenStream.Remove(sw);
+                            break;
+                        default:
+                            envioMensaje(sr.ReadLine(), ie);
+                            break;
 
                     }
+                    //if (mensaje == "MELARGO")
+                    //{
+                    //    cliente.Close();
+                    //    almacenStream.Remove(sw);
+                    //}
+                    //else if (mensaje != "")
+                    //{
+                    //    envioMensaje(sr.ReadLine(), ie);
+
+                    //}
                     //}
                 }
             }
