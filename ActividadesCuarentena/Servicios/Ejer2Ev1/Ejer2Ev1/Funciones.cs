@@ -55,6 +55,10 @@ namespace Ejer2Ev1
                     Console.WriteLine("Ruta incorrecta,introduzca una ruta valida de un archivo");
                     banderaArchivo = false;
                 }
+                catch (UnauthorizedAccessException) {
+                    Console.WriteLine("Ruta incorrecta,introduzca una ruta valida de un archivo");
+                    banderaArchivo = false;
+                }
             } while (!banderaArchivo);
         }
         public void ejecutarAplicacion()
