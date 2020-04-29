@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnReset = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,26 +78,26 @@
             // grabarNúmeroToolStripMenuItem
             // 
             this.grabarNúmeroToolStripMenuItem.Name = "grabarNúmeroToolStripMenuItem";
-            this.grabarNúmeroToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.grabarNúmeroToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.grabarNúmeroToolStripMenuItem.Text = "Grabar número";
             this.grabarNúmeroToolStripMenuItem.Click += new System.EventHandler(this.GrabarNúmeroToolStripMenuItem_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
@@ -114,6 +115,11 @@
             this.textBox1.Size = new System.Drawing.Size(122, 22);
             this.textBox1.TabIndex = 2;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.OverwritePrompt = false;
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFileDialog1_FileOk);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -122,9 +128,10 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Movil";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);

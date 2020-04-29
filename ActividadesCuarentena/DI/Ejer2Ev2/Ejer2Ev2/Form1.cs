@@ -15,7 +15,6 @@ namespace Ejer2Ev2
     {
         Form2 f = new Form2();
         Button btn;
-        static bool banderaColor = false;
 
 
         public Form1()
@@ -81,7 +80,6 @@ namespace Ejer2Ev2
         private void BtnReset_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
-            banderaColor = false;
             foreach (Control item in this.Controls)
             {
                 if (item is Button)
@@ -99,39 +97,37 @@ namespace Ejer2Ev2
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
 
-                using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName, true))
+                using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName, false))
                 {
                     sw.WriteLine(textBox1.Text);
                 }
             }
         }
-
-        private void Form1_MouseEnter(object sender, EventArgs e)
+        void cambiarColor(object sender, EventArgs e, Color color)
         {
-            if (!banderaColor)
+            if (sender is Button)
             {
-                if (sender is Button)
+                if (((Button)sender).BackColor != Color.DarkSalmon)
                 {
-                    ((Button)sender).BackColor = Color.Yellow;
+                    ((Button)sender).BackColor = color;
+
                 }
             }
+
+        }
+        private void Form1_MouseEnter(object sender, EventArgs e)
+        {
+            cambiarColor(sender, e, Color.Yellow);
         }
 
         private void Form1_MouseLeave(object sender, EventArgs e)
         {
-            if (!banderaColor)
-            {
-                if (sender is Button)
-                {
-                    ((Button)sender).BackColor = Color.Transparent;
-                }
-            }
+            cambiarColor(sender, e, Color.Transparent);
         }
 
         private void Button1_MouseDown(object sender, MouseEventArgs e)
         {
             ((Button)sender).BackColor = Color.DarkSalmon;
-            banderaColor = true;
         }
 
         private void SalirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -142,6 +138,11 @@ namespace Ejer2Ev2
         private void AcercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Programa realizado por: Donald Knuth");
+        }
+
+        private void SaveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
