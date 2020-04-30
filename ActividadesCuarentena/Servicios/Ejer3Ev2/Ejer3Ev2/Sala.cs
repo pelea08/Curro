@@ -16,8 +16,12 @@ namespace Ejer3Ev2
         static bool finalizacion = true;
         static List<Socket> almacenClientes = new List<Socket>();
         static List<StreamWriter> almacenStream = new List<StreamWriter>();
+        static List<int> almacenPuerto = new List<int>();
         int puerto = 0;
         bool puertoCorrecto = false;
+        static Socket a;
+        static bool banderaSw = false;
+
         public int leerPuerto()
         {
             using (StreamReader sr = new StreamReader("C:/Windows/Temp/puerto.txt"))
@@ -45,38 +49,34 @@ namespace Ejer3Ev2
         {
             foreach (Socket socket in almacenClientes)
             {
-
-                //socket.Connect(ie);
-
-                using (NetworkStream ns = new NetworkStream(socket))
-
-                using (StreamWriter sw = new StreamWriter(ns))
-                using (StreamReader sr = new StreamReader(ns))
-                {
-                    //while (finalizacion)
-                    //{
-                    //Añadimos cada persona que entra para evitar repeticion mensaje
-                    lock (l)
-                    {
-                        for (int i = 0; i < almacenStream.Count; i++)
-                        {
-                            //Enviale el mensaje a todos menos a mi mismo
-                            if (almacenStream[i] != sw)
-                            {
-                                sw.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
-                                sw.Flush();
-                            }
-                        }
-                    }
-                    //}
-
-                }
+                a = socket;
             }
 
+            using (NetworkStream ns = new NetworkStream(a))
+            using (StreamWriter sw = new StreamWriter(ns))
+            using (StreamReader sr = new StreamReader(ns))
+            {
+                lock (l)
+                {
+                    //Almacen puerto y stream siempre van a tener el mismo tamaño
+                    for (int i = 0; i < almacenStream.Count; i++)
+                    {
+
+                        if (!almacenStream[i].Equals(sw) & ie.Port != almacenPuerto[i])
+                        {
+                            almacenStream[i].WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
+                            almacenStream[i].Flush();
+                            //banderas = true;
+                        }
+
+
+
+                    }
+                }
+            }
         }
         public void inicioServicioChat()
         {
-            //Coger excepcion puerto ocupado , se incrementa
             bool banderaPuerto = false;
             int puerto = leerPuerto();
             IPEndPoint ie = new IPEndPoint(IPAddress.Any, puerto);
@@ -85,7 +85,7 @@ namespace Ejer3Ev2
             {
                 try
                 {
-                    ie = new IPEndPoint(IPAddress.Loopback, puerto);
+                    ie = new IPEndPoint(IPAddress.Any, puerto);
                     ss.Bind(ie);
                     ss.Listen(20);
                     banderaPuerto = true;
@@ -98,25 +98,19 @@ namespace Ejer3Ev2
                 }
             } while (!banderaPuerto);
 
-
-
             while (true)
             {
-                //for (int i = 0; i < almacenClientes.Count; i++)
-                //{
-                Socket s = ss.Accept();
-                almacenClientes.Add(s);
+                Socket cliente = ss.Accept();
+                almacenClientes.Add(cliente);
 
                 Thread hilo = new Thread(hiloCliente);
-                hilo.Start(s);
-
-                //}
-
+                hilo.Start(cliente);
             }
 
         }
         public void hiloCliente(object socket)
         {
+
             string mensaje;
             Socket cliente = (Socket)socket;
             IPEndPoint ie = (IPEndPoint)cliente.RemoteEndPoint;
@@ -126,37 +120,37 @@ namespace Ejer3Ev2
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-                sw.WriteLine("Bienvenidos al gran ejercicio hay " + almacenClientes.Count + " personas conectadas");
-                sw.Flush();
+
                 almacenStream.Add(sw);
+                //IP DE CADA PERSONA QUE SE CONECTA
+                almacenPuerto.Add(ie.Port);
+                sw.WriteLine("Bienvenidos al gran ejercicio hay " + almacenStream.Count + " personas conectadas");
+                sw.Flush();
+
                 while (finalizacion)
                 {
-                    lock (l)
+                    try
                     {
                         mensaje = sr.ReadLine();
-                        switch (mensaje)
+                        if (mensaje != "" && mensaje != "MELARGO" & mensaje != null)
                         {
-                            case "MELARGO":
-                                cliente.Close();
-                                almacenStream.Remove(sw);
-                                break;
-                            default:
-                                envioMensaje(mensaje, ie);
-                                break;
-
+                            envioMensaje(mensaje, ie);
+                        }
+                        else if (mensaje == "MELARGO" || mensaje == null)
+                        {
+                            cliente.Close();
+                            almacenStream.Remove(sw);
+                            almacenClientes.Remove(cliente);
+                            almacenPuerto.Remove(ie.Port);
                         }
                     }
-                    //if (mensaje == "MELARGO")
-                    //{
-                    //    cliente.Close();
-                    //    almacenStream.Remove(sw);
-                    //}
-                    //else if (mensaje != "")
-                    //{
-                    //    envioMensaje(sr.ReadLine(), ie);
-
-                    //}
-                    //}
+                    catch (IOException)
+                    {
+                        cliente.Close();
+                        almacenStream.Remove(sw);
+                        almacenClientes.Remove(cliente);
+                        almacenPuerto.Remove(ie.Port);
+                    }
                 }
             }
         }
