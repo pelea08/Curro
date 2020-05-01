@@ -37,13 +37,6 @@ namespace Ejer6Ev2
                 txtFoto.Text = ruta;
 
             }
-
-
-            //    using (OpenFileDialog  openFileDialog2 = new OpenFileDialog())
-            //{
-
-
-            //}
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -52,25 +45,25 @@ namespace Ejer6Ev2
             {
                 if (txtNombre.Texto != "" & txtFoto.Text != "" & Convert.ToInt32(txtEdad.Texto) != 0 & comboBox1.SelectedValue.ToString() != "")
                 {
-                    int n1 = 0;
+                    string n1 = "";
                     if (radioButton1.Checked)
                     {
-                        n1 = 1;
+                        n1 = "Hombre";
                     }
                     else if (radioButton2.Checked)
                     {
-                        n1 = 2;
+                        n1 = "Mujer";
                     }
 
 
-                    int n2 = 0;
+                    string n2 = "";
                     if (radioButton3.Checked)
                     {
-                        n2 = 1;
+                        n2 = "Hombre";
                     }
                     else if (radioButton4.Checked)
                     {
-                        n2 = 2;
+                        n2 = "Mujer";
                     }
                     sFriki = new sFriki(txtNombre.Texto, Convert.ToInt32(txtEdad.Texto), (sFriki.eAficion)Enum.Parse(typeof(sFriki.eAficion), comboBox1.SelectedItem.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n1.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n2.ToString()), txtFoto.Text);
                     f.frikis.Add(sFriki);

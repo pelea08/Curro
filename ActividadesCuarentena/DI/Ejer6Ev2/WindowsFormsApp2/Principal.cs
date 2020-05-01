@@ -66,8 +66,10 @@ namespace WindowsFormsApp2
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1) {
-                if (MessageBox.Show("Esta seguro que desea borrar", "Atencion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
+            if (listBox1.SelectedIndex != -1)
+            {
+                if (MessageBox.Show("Esta seguro que desea borrar", "Atencion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
                     int i = listBox1.SelectedIndex;
                     listBox1.Items.RemoveAt(i);
                     frikis.RemoveAt(i);
@@ -139,7 +141,49 @@ namespace WindowsFormsApp2
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (listBox1.SelectedIndex != -1)
+            {
+                int n = listBox1.SelectedIndex;
+                //Meter en label 1 toda la info al pichar desde listbox 1
+                label1.Text = "Nombre: " + frikis[n].Nombre + " Edad: " + frikis[n].Edad + " Aficion " + frikis[n].aficionPrincipal + " Sexo: " + frikis[n].Sexo + " Sexo Opuesto: " + frikis[n].sexoOpuesto;
+                pictureBox1.Image = new Bitmap(frikis[n].Foto);
 
+
+                List<sFriki> personasAdecuadas = new List<sFriki>();
+                listBox2.Items.Clear();
+
+                for (int i = 0; i < frikis.Count; i++)
+                {
+                    if (frikis[n].aficionPrincipal == frikis[i].aficionPrincipal && frikis[n].sexoOpuesto == frikis[i].Sexo && frikis[i].sexoOpuesto == frikis[n].Sexo)
+                    {
+                        if (frikis[i].Nombre != frikis[n].Nombre)
+                        {
+                            personasAdecuadas.Add(frikis[i]);
+
+                        }
+                    }
+
+                }
+                foreach (sFriki sFriki in personasAdecuadas)
+                {
+                    listBox2.Items.Add(sFriki.Nombre);
+
+                }
+                foreach (Control control in Controls)
+                {
+                    if (sender is PictureBox)
+                    {
+                        foreach (sFriki sFriki in personasAdecuadas)
+                        {
+                            ((PictureBox)sender).Image = new Bitmap(sFriki.Foto);
+
+                        }
+                    }
+
+                }
+
+
+            }
         }
     }
 }
