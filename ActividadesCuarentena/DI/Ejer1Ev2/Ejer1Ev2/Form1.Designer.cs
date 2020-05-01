@@ -75,7 +75,6 @@
             this.listBox2.Size = new System.Drawing.Size(174, 116);
             this.listBox2.TabIndex = 1;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2_SelectedIndexChanged);
-            this.listBox2.SizeChanged += new System.EventHandler(this.ListBox2_SizeChanged);
             // 
             // button1
             // 
@@ -134,8 +133,9 @@
             this.lblIndice.AutoSize = true;
             this.lblIndice.Location = new System.Drawing.Point(56, 196);
             this.lblIndice.Name = "lblIndice";
-            this.lblIndice.Size = new System.Drawing.Size(0, 17);
+            this.lblIndice.Size = new System.Drawing.Size(153, 17);
             this.lblIndice.TabIndex = 7;
+            this.lblIndice.Text = "Elemento Selecionado:";
             // 
             // lblElementos
             // 
@@ -169,6 +169,7 @@
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,0 +1,14 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Principal.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\Ejer6Ev2.IntroducionDatos.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\bin\Debug\Ejer6Ev2.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\bin\Debug\Ejer6Ev2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete

@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\bin\Debug\Ejer6Ev2.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\bin\Debug\Ejer6Ev2.pdb
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\obj\Debug\Ejer6Ev2.ValidateTextBox.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\obj\Debug\Ejer6Ev2.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\obj\Debug\Ejer6Ev2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\obj\Debug\Ejer6Ev2.dll
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\Ejer6Ev2\obj\Debug\Ejer6Ev2.pdb

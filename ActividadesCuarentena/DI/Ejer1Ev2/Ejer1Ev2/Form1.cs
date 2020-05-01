@@ -104,7 +104,12 @@ namespace Ejer1Ev2
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblIndice.Text = "Elemento Selecionado: " + listBox1.SelectedIndex;
+            lblIndice.Text = "Elemento Selecionado:";
+
+            foreach (int x in listBox1.SelectedIndices)
+            {
+                lblIndice.Text += " " + x;
+            }
 
         }
 
@@ -114,6 +119,10 @@ namespace Ejer1Ev2
 
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

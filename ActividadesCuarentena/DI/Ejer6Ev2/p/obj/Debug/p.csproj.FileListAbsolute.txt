@@ -1,0 +1,6 @@
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\p.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\Ejer6Ev2.IntroducionDatos.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\Ejer6Ev2.Principal.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\p.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\p.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\Curro\ActividadesCuarentena\DI\Ejer6Ev2\p\obj\Debug\p.csproj.CoreCompileInputs.cache
