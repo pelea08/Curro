@@ -34,6 +34,8 @@ namespace Ejer6Ev2
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ruta = openFileDialog1.FileName;
+                txtFoto.Text = ruta;
+
             }
 
 
@@ -70,7 +72,7 @@ namespace Ejer6Ev2
                     {
                         n2 = 2;
                     }
-                    sFriki = new sFriki(txtNombre.Texto, Convert.ToInt32(txtEdad.Texto), (sFriki.eAficion)Enum.Parse(typeof(sFriki.eAficion), n1.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n1.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n2.ToString()), txtFoto.Text);
+                    sFriki = new sFriki(txtNombre.Texto, Convert.ToInt32(txtEdad.Texto), (sFriki.eAficion)Enum.Parse(typeof(sFriki.eAficion), comboBox1.SelectedItem.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n1.ToString()), (sFriki.eSexo)Enum.Parse(typeof(sFriki.eSexo), n2.ToString()), txtFoto.Text);
                     f.frikis.Add(sFriki);
 
                     //f.actualizarNombres();
