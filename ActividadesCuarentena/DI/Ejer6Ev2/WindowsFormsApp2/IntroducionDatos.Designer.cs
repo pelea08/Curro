@@ -41,12 +41,12 @@
             this.txtFoto = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtEdad = new Ejer6Ev2.ValidateTextBox();
-            this.txtNombre = new Ejer6Ev2.ValidateTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtEdad = new Ejer6Ev2.ValidateTextBox();
+            this.txtNombre = new Ejer6Ev2.ValidateTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -161,26 +161,6 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Foto";
             // 
-            // txtEdad
-            // 
-            this.txtEdad.Location = new System.Drawing.Point(289, 29);
-            this.txtEdad.Multiline = false;
-            this.txtEdad.Name = "txtEdad";
-            this.txtEdad.Size = new System.Drawing.Size(150, 42);
-            this.txtEdad.TabIndex = 1;
-            this.txtEdad.Texto = "";
-            this.txtEdad.Tipo = Ejer6Ev2.ValidateTextBox.eTipo.Numerico;
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(21, 29);
-            this.txtNombre.Multiline = false;
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(150, 42);
-            this.txtNombre.TabIndex = 0;
-            this.txtNombre.Texto = "";
-            this.txtNombre.Tipo = Ejer6Ev2.ValidateTextBox.eTipo.Textual;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(96, 268);
@@ -222,6 +202,26 @@
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sexo Opuesto";
+            // 
+            // txtEdad
+            // 
+            this.txtEdad.Location = new System.Drawing.Point(289, 29);
+            this.txtEdad.Multiline = false;
+            this.txtEdad.Name = "txtEdad";
+            this.txtEdad.Size = new System.Drawing.Size(150, 42);
+            this.txtEdad.TabIndex = 1;
+            this.txtEdad.Texto = "";
+            this.txtEdad.Tipo = Ejer6Ev2.ValidateTextBox.eTipo.Numerico;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(21, 29);
+            this.txtNombre.Multiline = false;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(150, 42);
+            this.txtNombre.TabIndex = 0;
+            this.txtNombre.Texto = "";
+            this.txtNombre.Tipo = Ejer6Ev2.ValidateTextBox.eTipo.Textual;
             // 
             // IntroducionDatos
             // 

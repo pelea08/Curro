@@ -185,22 +185,35 @@ namespace WindowsFormsApp2
                 {
                     if (control is PictureBox)
                     {
+                        //if (((PictureBox)control).Name != pictureBox1.Name)
+                        //{
                         foreach (sFriki x in personasAdecuadas)
                         {
-                            if (((PictureBox)control).Name != pictureBox1.Name)
-                            {
-
-                                //((PictureBox)control).Image = new Bitmap(x.Foto);
-                                ((PictureBox)control).Image = Image.FromFile(x.Foto);
-                            }
-
-
+                            ((PictureBox)control).Image = new Bitmap(x.Foto);
+                            //((PictureBox)control).Image = Image.FromFile(x.Foto);
                         }
+
+
+                        //}
 
                     }
 
                 }
             }
+        }
+        private void ToolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(pictureBox1, frikis[listBox1.SelectedIndex].Nombre);
         }
     }
 }
