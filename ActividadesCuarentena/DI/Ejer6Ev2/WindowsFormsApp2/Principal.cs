@@ -94,7 +94,10 @@ namespace WindowsFormsApp2
             ///NOMBRES DE LOS CLIENTES
             /////NO TIENE SENTID NO VA
             //actualizarNombres();
-
+            //friki = new sFriki("Pedro", 21, sFriki.eAficion.Fantasia, sFriki.eSexo.Hombre, sFriki.eSexo.Mujer, "C:/Users/User/Desktop/fotosborra/1.jpg");
+            //friki = new sFriki("Pedra", 21, sFriki.eAficion.Fantasia, sFriki.eSexo.Mujer, sFriki.eSexo.Hombre, "C:/Users/User/Desktop/fotosborra/2.jpg");
+            //friki = new sFriki("Maria", 21, sFriki.eAficion.Fantasia, sFriki.eSexo.Mujer, sFriki.eSexo.Hombre, "C:/Users/User/Desktop/fotosborra/3.jpg");
+            //frikis.Add(friki);
         }
 
         private void AcercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,7 +149,15 @@ namespace WindowsFormsApp2
                 int n = listBox1.SelectedIndex;
                 //Meter en label 1 toda la info al pichar desde listbox 1
                 label1.Text = "Nombre: " + frikis[n].Nombre + " Edad: " + frikis[n].Edad + " Aficion " + frikis[n].aficionPrincipal + " Sexo: " + frikis[n].Sexo + " Sexo Opuesto: " + frikis[n].sexoOpuesto;
-                pictureBox1.Image = new Bitmap(frikis[n].Foto);
+                try
+                {
+                    pictureBox1.Image = new Bitmap(frikis[n].Foto);
+
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Introduzca una foto valida");
+                }
 
 
                 List<sFriki> personasAdecuadas = new List<sFriki>();
@@ -169,20 +180,26 @@ namespace WindowsFormsApp2
                     listBox2.Items.Add(sFriki.Nombre);
 
                 }
+
                 foreach (Control control in Controls)
                 {
-                    if (sender is PictureBox)
+                    if (control is PictureBox)
                     {
-                        foreach (sFriki sFriki in personasAdecuadas)
+                        foreach (sFriki x in personasAdecuadas)
                         {
-                            ((PictureBox)sender).Image = new Bitmap(sFriki.Foto);
+                            if (((PictureBox)control).Name != pictureBox1.Name)
+                            {
+
+                                //((PictureBox)control).Image = new Bitmap(x.Foto);
+                                ((PictureBox)control).Image = Image.FromFile(x.Foto);
+                            }
+
 
                         }
+
                     }
 
                 }
-
-
             }
         }
     }

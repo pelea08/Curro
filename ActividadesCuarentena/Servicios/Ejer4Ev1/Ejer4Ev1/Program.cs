@@ -68,29 +68,36 @@ namespace Ejer4Ev1
                         nAleDormir = r.Next(100, 101 * nAleatorio);
                         Console.SetCursorPosition(5, (int)a);
                         Console.WriteLine("{0,2}", nAleatorio);
-                        if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7 && finalizarBarra)
+                        if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7)
                         {
-                            contadorComun += 1;
-                            //Cuando esto pasa tienes que pausar la barra que gira
-                            finalizarBarra = false;
-                        }
-                        else if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7 && !finalizarBarra)
-                        {
-                            contadorComun += 5;
+                            if (finalizarBarra)
+                            {
+                                contadorComun += 1;
+                                //Cuando esto pasa tienes que pausar la barra que gira
+                                finalizarBarra = false;
+                            }
+                            else
+                            {
+                                contadorComun += 5;
+                            }
+
                         }
                         if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7)
                         {
-                            contadorComun -= 1;
-                            //Cuando esto pasa tiene que guirar la barra
-                            lock (l)
+                            if (!finalizarBarra)
                             {
-                                finalizarBarra = true;
-                                Monitor.Pulse(l);
+                                contadorComun -= 1;
+                                //Cuando esto pasa tiene que guirar la barra
+                                lock (l)
+                                {
+                                    finalizarBarra = true;
+                                    Monitor.Pulse(l);
+                                }
                             }
-                        }
-                        else if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7 && finalizarBarra)
-                        {
-                            contadorComun -= 5;
+                            else
+                            {
+                                contadorComun -= 5;
+                            }
                         }
                         if ((int)a == 1 && contadorComun > 14)
                         {

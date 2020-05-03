@@ -19,6 +19,7 @@ namespace Ejer6Ev2
         public IntroducionDatos()
         {
             InitializeComponent();
+
         }
 
         private void IntroducionDatos_Load(object sender, EventArgs e)
