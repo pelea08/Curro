@@ -13,7 +13,7 @@ namespace Ejer4Ev2
         static void Main(string[] args)
         {
             ServidorArchivos servidorArchivos = new ServidorArchivos();
-            ////Console.WriteLine(servidorArchivos.leeArchivo("aa.txt", 300000));
+            //Console.WriteLine(servidorArchivos.leeArchivo("aa.txt", 300000));
             //Console.WriteLine(servidorArchivos.leePuerto());
             //servidorArchivos.guardaPuerto(2222);
             //Console.WriteLine(servidorArchivos.listaArchivos());

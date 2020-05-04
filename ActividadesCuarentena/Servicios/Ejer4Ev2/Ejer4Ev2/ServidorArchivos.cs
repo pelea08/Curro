@@ -12,6 +12,7 @@ namespace Ejer4Ev2
 {
     public class ServidorArchivos
     {
+        
         static bool finalizacion = true;
 
         //MEtodos publicos NO estaticos
@@ -47,6 +48,10 @@ namespace Ejer4Ev2
                 }
             }
             catch (FileNotFoundException)
+            {
+                return "< ERROR_IO >";
+            }
+            catch (DirectoryNotFoundException)
             {
                 return "< ERROR_IO >";
             }
@@ -119,61 +124,67 @@ namespace Ejer4Ev2
             Socket s = (Socket)socket;
             IPEndPoint ie = (IPEndPoint)s.RemoteEndPoint;
 
-            //s.Connect(ie);
             Console.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port);
             using (NetworkStream ns = new NetworkStream(s))
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-                sw.WriteLine("Conexion Establecida");
-                sw.Flush();
+                
                 while (finalizacion)
                 {
+                    sw.WriteLine("Conexion Establecida");
+                    sw.Flush();
                     try
                     {
-                        mensaje = sr.ReadLine();
-                        string[] troceo = mensaje.Split(' ');
-
-                        switch (troceo[0])
+                        if (finalizacion)
                         {
-                            case "GET":
-                                sw.WriteLine(leeArchivo(troceo[1], Convert.ToInt32(troceo[2])));
-                                sw.Flush();
-                                break;
+                            mensaje = sr.ReadLine();
+                            if (mensaje != null)
+                            {
+                                string[] troceo = mensaje.Split(' ');
 
-                            case "PORT":
-                                guardaPuerto(Convert.ToInt32(troceo[1]));
-                                break;
+                                switch (troceo[0])
+                                {
+                                    case "GET":
+                                        string[] troceo1 = troceo[1].Split(',');
+                                        sw.WriteLine(leeArchivo(troceo1[0], Convert.ToInt32(troceo1[1])));
+                                        sw.Flush();
+                                        break;
 
-                            case "LIST":
-                                sw.WriteLine(listaArchivos());
-                                sw.Flush();
-                                break;
+                                    case "PORT":
+                                        guardaPuerto(Convert.ToInt32(troceo[1]));
+                                        break;
 
-                            case "CLOSE":
-                                s.Close();
-                                break;
+                                    case "LIST":
+                                        sw.WriteLine(listaArchivos());
+                                        sw.Flush();
+                                        break;
 
-                            case "HALT":
-                                finalizacion = false;
-                                Environment.Exit(0);
-                                break;
+                                    case "CLOSE":
+                                        s.Close();
+                                        break;
+
+                                    case "HALT":
+                                        finalizacion = false;
+                                        break;
+                                }
+                            }
                         }
                     }
                     catch (IOException)
                     {
-
                     }
                     catch (FormatException)
                     {
                         sw.WriteLine("Introduzca el formato de los comandos adecuados");
                         sw.Flush();
                     }
-
+                    if (!finalizacion)
+                    {
+                        Console.WriteLine("SERVIDOR APAGADO");
+                    }
                 }
-
             }
-
         }
     }
 }
