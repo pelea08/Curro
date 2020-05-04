@@ -39,19 +39,17 @@ namespace Ejer4Ev1
                 {
                     Monitor.Wait(l);
 
-                    Console.SetCursorPosition(1, 15);
-                    Console.Write(simbolo[i]);
-                    i++;
-
-                    if (i == 4)
+                    if (finalizarBarra)
                     {
-                        i = 0;
+                        Console.SetCursorPosition(1, 15);
+                        Console.Write(simbolo[i]);
+                        i++;
+
+                        if (i == 4)
+                        {
+                            i = 0;
+                        }
                     }
-                    //if (finalizar)
-                    //{
-                    //    lock (l)
-                    //        Monitor.Pulse(l);
-                    //}
                 }
                 Thread.Sleep(750);
             }
