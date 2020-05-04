@@ -173,7 +173,8 @@ namespace Ejer1Ev1
                     }
                     else
                     {
-                        banderas[aleatorio] = true;
+                        //banderas[aleatorio] = true;
+                        banderas[indiceBien] = true;
 
                     }
                 }

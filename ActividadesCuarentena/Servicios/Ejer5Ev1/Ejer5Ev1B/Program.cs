@@ -41,7 +41,7 @@ namespace Ejer5Ev1B
                         }
                         catch (OverflowException)
                         {
-                            Console.WriteLine("Introduce un ´numero adecuado");
+                            Console.WriteLine("Introduce un número adecuado");
                         }
                         break;
                     case 2:
@@ -104,11 +104,34 @@ namespace Ejer5Ev1B
             {
 
             }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                Console.WriteLine("No puedes obtener esa informacion");
+            }
         }
         public static void cierreProceso(int id)
         {
+            int res = 0;
             Process p = Process.GetProcessById(id);
-            p.CloseMainWindow();
+
+            try
+            {
+                Console.WriteLine("Desea cerrar el proceso 1-SI 2-NO");
+                res = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Solo son validos es numero 1 o 2");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Solo son validos es numero 1 o 2");
+            }
+            
+            if (res == 1)
+            {
+                p.CloseMainWindow();
+            }
 
         }
     }

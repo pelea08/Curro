@@ -15,33 +15,38 @@ namespace Ejer3Ev2
         static readonly object l = new object();
         static bool finalizacion = true;
         static List<Socket> almacenClientes = new List<Socket>();
-        static List<StreamWriter> almacenStream = new List<StreamWriter>();
         static List<int> almacenPuerto = new List<int>();
         int puerto = 0;
         bool puertoCorrecto = false;
-        static Socket a;
-        static bool banderaSw = false;
 
         public int leerPuerto()
         {
-            using (StreamReader sr = new StreamReader("C:/Windows/Temp/puerto.txt"))
+            try
             {
-                try
+                using (StreamReader sr = new StreamReader("C:/Windows/Temp/puerto.txt"))
                 {
-                    puerto = Convert.ToInt32(sr.ReadLine());
+                    try
+                    {
+                        puerto = Convert.ToInt32(sr.ReadLine());
+                    }
+                    catch (FormatException)
+                    {
+                        puertoCorrecto = false;
+                    }
+                    if (puerto > 0 && puerto < 65535)
+                    {
+                        puertoCorrecto = true;
+                    }
                 }
-                catch (FormatException)
+                if (!puertoCorrecto)
                 {
-                    puertoCorrecto = false;
-                }
-                if (puerto > 0 && puerto < 65535)
-                {
-                    puertoCorrecto = true;
+                    puerto = 10000;
                 }
             }
-            if (!puertoCorrecto)
+            catch (FileNotFoundException)
             {
                 puerto = 10000;
+
             }
             return puerto;
         }
@@ -49,28 +54,17 @@ namespace Ejer3Ev2
         {
             foreach (Socket socket in almacenClientes)
             {
-                a = socket;
-            }
-
-            using (NetworkStream ns = new NetworkStream(a))
-            using (StreamWriter sw = new StreamWriter(ns))
-            using (StreamReader sr = new StreamReader(ns))
-            {
-                lock (l)
+                using (NetworkStream ns = new NetworkStream(socket))
+                using (StreamWriter sw = new StreamWriter(ns))
                 {
-                    //Almacen puerto y stream siempre van a tener el mismo tamaño
-                    for (int i = 0; i < almacenStream.Count; i++)
+                    lock (l)
                     {
-
-                        if (!almacenStream[i].Equals(sw) & ie.Port != almacenPuerto[i])
+                        IPEndPoint endPoint = (IPEndPoint)socket.RemoteEndPoint;
+                        if (ie.Port != endPoint.Port)
                         {
-                            almacenStream[i].WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
-                            almacenStream[i].Flush();
-                            //banderas = true;
+                            sw.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
+                            sw.Flush();
                         }
-
-
-
                     }
                 }
             }
@@ -102,11 +96,9 @@ namespace Ejer3Ev2
             {
                 Socket cliente = ss.Accept();
                 almacenClientes.Add(cliente);
-
                 Thread hilo = new Thread(hiloCliente);
                 hilo.Start(cliente);
             }
-
         }
         public void hiloCliente(object socket)
         {
@@ -120,38 +112,44 @@ namespace Ejer3Ev2
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-
-                almacenStream.Add(sw);
-                //IP DE CADA PERSONA QUE SE CONECTA
                 almacenPuerto.Add(ie.Port);
-                sw.WriteLine("Bienvenidos al gran ejercicio hay " + almacenStream.Count + " personas conectadas");
+                sw.WriteLine("Bienvenidos al gran ejercicio hay " + almacenClientes.Count + " personas conectadas");
                 sw.Flush();
 
                 while (finalizacion)
                 {
-                    try
+                    lock (l)
                     {
-                        mensaje = sr.ReadLine();
-                        if (mensaje != "" && mensaje != "MELARGO" & mensaje != null)
+                        if (finalizacion)
                         {
-                            envioMensaje(mensaje, ie);
+                            try
+                            {
+                                mensaje = sr.ReadLine();
+                                if (mensaje != "" && mensaje != "MELARGO" & mensaje != null)
+                                {
+                                    envioMensaje(mensaje, ie);
+                                }
+                                else if (mensaje == "MELARGO" || mensaje == null)
+                                {
+                                    finalizacion = false;
+                                    break;
+                                }
+                            }
+                            catch (IOException)
+                            {
+                                finalizacion = false;
+                                break;
+                            }
                         }
-                        else if (mensaje == "MELARGO" || mensaje == null)
-                        {
-                            cliente.Close();
-                            almacenStream.Remove(sw);
-                            almacenClientes.Remove(cliente);
-                            almacenPuerto.Remove(ie.Port);
-                        }
-                    }
-                    catch (IOException)
-                    {
-                        cliente.Close();
-                        almacenStream.Remove(sw);
-                        almacenClientes.Remove(cliente);
-                        almacenPuerto.Remove(ie.Port);
                     }
                 }
+                if (!finalizacion)
+                {
+                    cliente.Close();
+                    almacenClientes.Remove(cliente);
+                    almacenPuerto.Remove(ie.Port);
+                }
+
             }
         }
     }

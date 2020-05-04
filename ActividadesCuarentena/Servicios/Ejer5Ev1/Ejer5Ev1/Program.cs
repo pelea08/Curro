@@ -18,8 +18,7 @@ namespace Ejer5Ev1
 
 
 
-            Thread gestionAlmacen = new Thread(gestorAlmacen);
-            gestionAlmacen.Start();
+
 
             Thread[] conjuntoNave = new Thread[5];
             for (int i = 0; i < 5; i++)
@@ -30,22 +29,31 @@ namespace Ejer5Ev1
             {
                 conjuntoNave[j].Start(nombres[j]);
             }
-
+            Thread gestionAlmacen = new Thread(gestorAlmacen);
+            gestionAlmacen.Start();
 
             Console.ReadKey();
-
-            finalizacion = false;
+            lock (l)
+            {
+                finalizacion = false;
+            }
             //Console.SetCursorPosition(1, 25);
             Console.WriteLine("El ultimo valor del stock es " + stock);
             Console.ReadKey();
         }
         static void gestorAlmacen()
         {
-            lock (l)
+            while (stock == 0)
             {
-                Monitor.Wait(l);
-                stock += 100;
-                Console.WriteLine("--------> Se ha aumentado el stock en 100 unidades, en total hay" + stock + " <--------");
+                lock (l)
+                {
+                    Monitor.Wait(l);
+                    if (stock == 0)
+                    {
+                        stock += 100;
+                        Console.WriteLine("--------> Se ha aumentado el stock en 100 unidades, en total hay" + stock + " <--------");
+                    }
+                }
             }
         }
         static void nave(object nombre)
@@ -56,24 +64,26 @@ namespace Ejer5Ev1
             {
                 lock (l)
                 {
-                    if (stock <= 0)
+                    if (finalizacion)
                     {
-                        Console.WriteLine((string)nombre + " no puede cargar por falta de stock avisa y se va");
-                        Monitor.Pulse(l);
-                    }
-                    if (aleatorio == 0)
-                    {
-                        stock -= 50;
-                        Console.WriteLine((string)nombre + " ha quitado 50 unidades, quedan" + stock + " en el almacen");
-                    }
-                    else
-                    {
-                        stock += 50;
-                        Console.WriteLine((string)nombre + " ha  agregado 50 unidades, quedan" + stock + " en el almacen");
-                    }
-                    if (stock < 1)
-                    {
-                        Monitor.Pulse(l);
+                        if (stock == 0)
+                        {
+                            Console.WriteLine((string)nombre + " no puede cargar por falta de stock avisa y se va");
+                            Monitor.Pulse(l);
+                        }
+                        else
+                        {
+                            if (aleatorio == 0)
+                            {
+                                stock -= 50;
+                                Console.WriteLine((string)nombre + " ha quitado 50 unidades, quedan" + stock + " en el almacen");
+                            }
+                            else
+                            {
+                                stock += 50;
+                                Console.WriteLine((string)nombre + " ha  agregado 50 unidades, quedan" + stock + " en el almacen");
+                            }
+                        }
                     }
                 }
                 Thread.Sleep(2000);
