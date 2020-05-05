@@ -37,10 +37,11 @@ namespace Ejer4Ev1
             {
                 lock (l)
                 {
-                    Monitor.Wait(l);
 
                     if (finalizarBarra)
                     {
+                        Monitor.Wait(l);
+
                         Console.SetCursorPosition(1, 15);
                         Console.Write(simbolo[i]);
                         i++;

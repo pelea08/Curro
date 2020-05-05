@@ -56,11 +56,12 @@ namespace Ejer2Ev2
             temporizador.Elapsed += OnTimedEvent;
 
             Console.WriteLine("CONECTADO AL PUERTO: " + ie.Port);
-            nRepartir = new List<int>();
-            for (int i = 0; i < 20; i++)
-            {
-                nRepartir.Add(i);
-            }
+            //nRepartir = new List<int>();
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    nRepartir.Add(i);
+            //}
+            repartiNumero();
             while (true)
             {
                 Socket cliente = socket.Accept();
@@ -165,12 +166,18 @@ namespace Ejer2Ev2
                         sw.Flush();
                         //Ojo aqui finalizamos asunto
                         Monitor.Wait(l);
-                        //s.Close();
                         banderaFinalizacion = true;
                     }
                 }
             }
             s.Close();
+        }
+        static void repartiNumero() {
+            nRepartir = new List<int>();
+            for (int i = 0; i < 20; i++)
+            {
+                nRepartir.Add(i);
+            }
         }
         static void reiniciar()
         {
@@ -182,6 +189,7 @@ namespace Ejer2Ev2
             almacenJugadores = new Hashtable();
             banderaFinalizacion = false;
             temporizador.Stop();
+            repartiNumero();
         }
     }
 }

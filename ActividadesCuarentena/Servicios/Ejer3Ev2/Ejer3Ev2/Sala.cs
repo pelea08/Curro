@@ -62,6 +62,7 @@ namespace Ejer3Ev2
                         IPEndPoint endPoint = (IPEndPoint)socket.RemoteEndPoint;
                         if (ie.Port != endPoint.Port)
                         {
+
                             sw.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port + " Mensaje: " + m);
                             sw.Flush();
                         }
@@ -83,7 +84,7 @@ namespace Ejer3Ev2
                     ss.Bind(ie);
                     ss.Listen(20);
                     banderaPuerto = true;
-                    Console.WriteLine("Puerto: " + ie.Port + " IP:" + ie.Address);
+                    Console.WriteLine("Puerto: " + ie.Port);
                 }
                 catch (SocketException)
                 {
@@ -92,28 +93,40 @@ namespace Ejer3Ev2
                 }
             } while (!banderaPuerto);
 
+
             while (true)
             {
+
+
                 Socket cliente = ss.Accept();
-                almacenClientes.Add(cliente);
+
                 Thread hilo = new Thread(hiloCliente);
                 hilo.Start(cliente);
+                lock (l)
+                {
+                    almacenClientes.Add(cliente);
+
+                }
+
             }
         }
         public void hiloCliente(object socket)
         {
-
+            bool apagar = false;
             string mensaje;
             Socket cliente = (Socket)socket;
             IPEndPoint ie = (IPEndPoint)cliente.RemoteEndPoint;
-
             Console.WriteLine("IP Cliente: " + ie.Address + " Puerto Cliente: " + ie.Port);
+
+            lock (l)
+            {
+                almacenPuerto.Add(ie.Port);
+            }
             using (NetworkStream ns = new NetworkStream(cliente))
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-                almacenPuerto.Add(ie.Port);
-                sw.WriteLine("Bienvenidos al gran ejercicio hay " + almacenClientes.Count + " personas conectadas");
+                sw.WriteLine("Bienvenidos " + almacenClientes.Count + " personas conectadas");
                 sw.Flush();
 
                 while (finalizacion)
@@ -125,31 +138,34 @@ namespace Ejer3Ev2
                             try
                             {
                                 mensaje = sr.ReadLine();
+
                                 if (mensaje != "" && mensaje != "MELARGO" & mensaje != null)
                                 {
                                     envioMensaje(mensaje, ie);
                                 }
                                 else if (mensaje == "MELARGO" || mensaje == null)
                                 {
-                                    finalizacion = false;
+                                    apagar = true;
                                     break;
                                 }
                             }
                             catch (IOException)
                             {
-                                finalizacion = false;
+                                apagar = true;
                                 break;
                             }
                         }
                     }
                 }
-                if (!finalizacion)
+                if (apagar)
                 {
-                    cliente.Close();
-                    almacenClientes.Remove(cliente);
-                    almacenPuerto.Remove(ie.Port);
+                    lock (l)
+                    {
+                        cliente.Close();
+                        almacenClientes.Remove(cliente);
+                        almacenPuerto.Remove(ie.Port);
+                    }
                 }
-
             }
         }
     }

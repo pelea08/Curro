@@ -12,9 +12,9 @@ namespace Ejer4Ev2
 {
     public class ServidorArchivos
     {
-        
-        static bool finalizacion = true;
 
+        static bool finalizacion = true;
+        static bool apagar = true;
         //MEtodos publicos NO estaticos
         public string leeArchivo(string nombreArchivo, int nLineas)
         {
@@ -99,19 +99,30 @@ namespace Ejer4Ev2
             try
             {
                 IPEndPoint ie = new IPEndPoint(IPAddress.Any, leePuerto());
+
                 Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                s.Bind(ie);
-                s.Listen(20);
-                Console.WriteLine("Puerto de Conexion " + ie.Port);
-
-                while (true)
+                if (!apagar)
                 {
-                    Socket cliente = s.Accept();
-
-                    Thread hilo = new Thread(hiloCliente);
-                    hilo.Start(cliente);
+                    s.Close();
                 }
+                else
+                {
+                    s.Bind(ie);
+                    s.Listen(20);
+                    Console.WriteLine("Puerto de Conexion " + ie.Port);
+
+                    while (true)
+                    {
+                        Socket cliente = s.Accept();
+
+                        Thread hilo = new Thread(hiloCliente);
+                        hilo.Start(cliente);
+                    }
+
+                }
+
+
+
             }
             catch (SocketException)
             {
@@ -129,13 +140,14 @@ namespace Ejer4Ev2
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
             {
-                
+
                 while (finalizacion)
                 {
-                    sw.WriteLine("Conexion Establecida");
-                    sw.Flush();
+
                     try
                     {
+                        sw.WriteLine("Conexion Establecida");
+                        sw.Flush();
                         if (finalizacion)
                         {
                             mensaje = sr.ReadLine();
@@ -165,24 +177,28 @@ namespace Ejer4Ev2
                                         break;
 
                                     case "HALT":
-                                        finalizacion = false;
+                                        apagar = false;
                                         break;
+                                }
+                                if (!apagar)
+                                {
+                                    Console.WriteLine("SERVIDOR APAGADO");
+                                    finalizacion = false;
+                                    break;
                                 }
                             }
                         }
                     }
                     catch (IOException)
                     {
+                        break;
                     }
                     catch (FormatException)
                     {
                         sw.WriteLine("Introduzca el formato de los comandos adecuados");
                         sw.Flush();
                     }
-                    if (!finalizacion)
-                    {
-                        Console.WriteLine("SERVIDOR APAGADO");
-                    }
+
                 }
             }
         }

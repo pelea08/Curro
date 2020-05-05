@@ -130,7 +130,7 @@ namespace Ejer5Ev1B
             
             if (res == 1)
             {
-                p.CloseMainWindow();
+                p.Kill();
             }
 
         }
