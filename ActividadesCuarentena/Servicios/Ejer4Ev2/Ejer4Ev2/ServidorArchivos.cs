@@ -15,6 +15,8 @@ namespace Ejer4Ev2
 
         static bool finalizacion = true;
         static bool apagar = true;
+        static Socket cliente;
+
         //MEtodos publicos NO estaticos
         public string leeArchivo(string nombreArchivo, int nLineas)
         {
@@ -101,29 +103,27 @@ namespace Ejer4Ev2
                 IPEndPoint ie = new IPEndPoint(IPAddress.Any, leePuerto());
 
                 Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                s.Bind(ie);
+                s.Listen(20);
+
                 if (!apagar)
                 {
                     s.Close();
+                    cliente.Close();
                 }
                 else
                 {
-                    s.Bind(ie);
-                    s.Listen(20);
                     Console.WriteLine("Puerto de Conexion " + ie.Port);
-
-                    while (true)
-                    {
-                        Socket cliente = s.Accept();
-
-                        Thread hilo = new Thread(hiloCliente);
-                        hilo.Start(cliente);
-                    }
-
                 }
+                while (apagar)
+                {
 
-
-
+                    cliente = s.Accept();
+                    Thread hilo = new Thread(hiloCliente);
+                    hilo.Start(cliente);
+                }
             }
+
             catch (SocketException)
             {
                 Console.WriteLine("PUERTO OCUPADO");
@@ -136,6 +136,7 @@ namespace Ejer4Ev2
             IPEndPoint ie = (IPEndPoint)s.RemoteEndPoint;
 
             Console.WriteLine("IP: " + ie.Address + " Puerto: " + ie.Port);
+
             using (NetworkStream ns = new NetworkStream(s))
             using (StreamWriter sw = new StreamWriter(ns))
             using (StreamReader sr = new StreamReader(ns))
@@ -184,6 +185,7 @@ namespace Ejer4Ev2
                                 {
                                     Console.WriteLine("SERVIDOR APAGADO");
                                     finalizacion = false;
+                                    s.Close();
                                     break;
                                 }
                             }
