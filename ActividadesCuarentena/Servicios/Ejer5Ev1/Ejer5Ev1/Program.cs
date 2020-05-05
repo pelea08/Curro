@@ -29,14 +29,16 @@ namespace Ejer5Ev1
             Thread gestionAlmacen = new Thread(gestorAlmacen);
             gestionAlmacen.Start();
 
+
             Console.ReadKey();
             lock (l)
             {
                 finalizacion = false;
                 finalizacion1 = false;
+                Monitor.Pulse(l);
+                Console.WriteLine("El ultimo valor del stock es " + stock);
+                Console.ReadKey();
             }
-            Console.WriteLine("El ultimo valor del stock es " + stock);
-            Console.ReadKey();
         }
         static void gestorAlmacen()
         {
@@ -56,15 +58,15 @@ namespace Ejer5Ev1
         }
         static void nave(object nombre)
         {
-            Random r = new Random();
-            int aleatorio = r.Next(0, 3);
+
             while (finalizacion)
             {
                 lock (l)
                 {
                     if (finalizacion)
                     {
-                        //No gestiones 2 veces el cero no tiene sentido porque en el momento que cambie en el transcurso del proceso liadisima
+                        Random r = new Random();
+                        int aleatorio = r.Next(0, 3);
                         if (stock == 0)
                         {
                             Console.WriteLine((string)nombre + " no puede cargar por falta de stock avisa y se va");
@@ -74,12 +76,12 @@ namespace Ejer5Ev1
                         {
                             if (aleatorio == 0)
                             {
-                                stock -= 50;
+                                stock += 50;
                                 Console.WriteLine((string)nombre + " ha quitado 50 unidades, quedan" + stock + " en el almacen");
                             }
                             else
                             {
-                                stock += 50;
+                                stock -= 50;
                                 Console.WriteLine((string)nombre + " ha  agregado 50 unidades, quedan" + stock + " en el almacen");
                             }
                         }
