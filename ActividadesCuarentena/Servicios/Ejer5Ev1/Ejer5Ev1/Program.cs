@@ -11,14 +11,11 @@ namespace Ejer5Ev1
     {
         static readonly object l = new object();
         static bool finalizacion = true;
+        static bool finalizacion1 = true;
         static int stock = 100;
         static void Main(string[] args)
         {
             string[] nombres = { "Halcón Milenario", "Nostromo", "Discovery 1", "Lego Spaceship", " Gatobús" };
-
-
-
-
 
             Thread[] conjuntoNave = new Thread[5];
             for (int i = 0; i < 5; i++)
@@ -36,20 +33,21 @@ namespace Ejer5Ev1
             lock (l)
             {
                 finalizacion = false;
+                finalizacion1 = false;
             }
-            //Console.SetCursorPosition(1, 25);
             Console.WriteLine("El ultimo valor del stock es " + stock);
             Console.ReadKey();
         }
         static void gestorAlmacen()
         {
-            while (stock == 0)
+            while (finalizacion1)
             {
                 lock (l)
                 {
-                    Monitor.Wait(l);
-                    if (stock == 0)
+                    if (finalizacion1)
                     {
+                        Monitor.Wait(l);
+
                         stock += 100;
                         Console.WriteLine("--------> Se ha aumentado el stock en 100 unidades, en total hay" + stock + " <--------");
                     }
@@ -66,6 +64,7 @@ namespace Ejer5Ev1
                 {
                     if (finalizacion)
                     {
+                        //No gestiones 2 veces el cero no tiene sentido porque en el momento que cambie en el transcurso del proceso liadisima
                         if (stock == 0)
                         {
                             Console.WriteLine((string)nombre + " no puede cargar por falta de stock avisa y se va");

@@ -79,13 +79,14 @@ namespace Ejer2Ev2
                     temporizador.Start();
                 }
             }
+            socket.Close();
         }
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
+            bool prueba = false;
             banderaFinalizacion = false;
             banderaRestarTiempo = true;
             contadorSegundos--;
-
             if (contadorSegundos == 0)
             {
                 temporizador.Stop();
@@ -111,8 +112,10 @@ namespace Ejer2Ev2
                         catch (IOException)
                         {
                         }
-
+                        jugadorSw.Close();
+                        prueba = true;
                     }
+
                     Monitor.Pulse(l);
                 }
             }
@@ -122,19 +125,26 @@ namespace Ejer2Ev2
                 {
                     foreach (DictionaryEntry dictionaryEntry in almacenJugadores)
                     {
-                        StreamWriter jugadorSw = (StreamWriter)dictionaryEntry.Value;
-
+                        StreamWriter jugadorSw1 = (StreamWriter)dictionaryEntry.Value;
                         try
                         {
-                            jugadorSw.WriteLine("Cuenta Atras: " + contadorSegundos);
-                            jugadorSw.Flush();
+                            jugadorSw1.WriteLine("Cuenta Atras: " + contadorSegundos);
+                            jugadorSw1.Flush();
                         }
                         catch (IOException)
                         {
                         }
+                        catch (ObjectDisposedException)
+                        {
+                            jugadorSw1.Close();
+
+                        }
+                        jugadorSw1.Close();
+
                     }
                 }
             }
+
         }
         static void hiloCliente(object socket)
         {
@@ -165,6 +175,7 @@ namespace Ejer2Ev2
                         sw.Flush();
                         //Ojo aqui finalizamos asunto
                         Monitor.Wait(l);
+                        //s.Close();
                         banderaFinalizacion = true;
                     }
                 }
