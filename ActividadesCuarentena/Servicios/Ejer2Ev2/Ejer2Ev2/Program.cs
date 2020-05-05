@@ -79,11 +79,9 @@ namespace Ejer2Ev2
                     temporizador.Start();
                 }
             }
-            socket.Close();
         }
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            bool prueba = false;
             banderaFinalizacion = false;
             banderaRestarTiempo = true;
             contadorSegundos--;
@@ -113,10 +111,9 @@ namespace Ejer2Ev2
                         {
                         }
                         jugadorSw.Close();
-                        prueba = true;
                     }
 
-                    Monitor.Pulse(l);
+                    Monitor.PulseAll(l);
                 }
             }
             else
@@ -134,13 +131,6 @@ namespace Ejer2Ev2
                         catch (IOException)
                         {
                         }
-                        catch (ObjectDisposedException)
-                        {
-                            jugadorSw1.Close();
-
-                        }
-                        jugadorSw1.Close();
-
                     }
                 }
             }
