@@ -148,6 +148,15 @@ namespace Ejer3Ev2
                                     apagar = true;
                                     break;
                                 }
+                                if (apagar)
+                                {
+                                    lock (l)
+                                    {
+                                        cliente.Close();
+                                        almacenClientes.Remove(cliente);
+                                        almacenPuerto.Remove(ie.Port);
+                                    }
+                                }
                             }
                             catch (IOException)
                             {
@@ -157,15 +166,7 @@ namespace Ejer3Ev2
                         }
                     }
                 }
-                if (apagar)
-                {
-                    lock (l)
-                    {
-                        cliente.Close();
-                        almacenClientes.Remove(cliente);
-                        almacenPuerto.Remove(ie.Port);
-                    }
-                }
+
             }
         }
     }

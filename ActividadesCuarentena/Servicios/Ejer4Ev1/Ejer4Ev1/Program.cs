@@ -15,6 +15,7 @@ namespace Ejer4Ev1
         static int nAleatorio;
         static int contadorComun = 0;
         static bool finalizarBarra = true;
+        static bool pausarBarra = true;
         static int nAleDormir;
         static void Main(string[] args)
         {
@@ -37,19 +38,17 @@ namespace Ejer4Ev1
             {
                 lock (l)
                 {
-
-                    if (finalizarBarra)
+                    if (pausarBarra)
                     {
                         Monitor.Wait(l);
-
-                        Console.SetCursorPosition(1, 15);
-                        Console.Write(simbolo[i]);
                         i++;
-
-                        if (i == 4)
+                        if (i == simbolo.Length)
                         {
                             i = 0;
                         }
+                        Console.SetCursorPosition(1, 15);
+                        Console.Write(simbolo[i]);
+
                     }
                 }
                 Thread.Sleep(750);
@@ -65,31 +64,29 @@ namespace Ejer4Ev1
                     {
                         nAleatorio = r.Next(1, 11);
                         nAleDormir = r.Next(100, 101 * nAleatorio);
-                        Console.SetCursorPosition(5, (int)a);
-                        Console.WriteLine("{0,2}", nAleatorio);
+                      
                         if ((int)a == 1 && nAleatorio == 5 || nAleatorio == 7)
                         {
-                            if (finalizarBarra)
+                            if (pausarBarra)
                             {
                                 contadorComun += 1;
                                 //Cuando esto pasa tienes que pausar la barra que gira
-                                finalizarBarra = false;
+                                pausarBarra = false;
                             }
                             else
                             {
                                 contadorComun += 5;
                             }
-
                         }
                         if ((int)a == 20 && nAleatorio == 5 || nAleatorio == 7)
                         {
-                            if (!finalizarBarra)
+                            if (!pausarBarra)
                             {
                                 contadorComun -= 1;
                                 //Cuando esto pasa tiene que guirar la barra
                                 lock (l)
                                 {
-                                    finalizarBarra = true;
+                                    pausarBarra = true;
                                     Monitor.Pulse(l);
                                 }
                             }
@@ -98,6 +95,9 @@ namespace Ejer4Ev1
                                 contadorComun -= 5;
                             }
                         }
+                        Console.SetCursorPosition(5, (int)a);
+                        Console.WriteLine("{0,2}", nAleatorio);
+
                         if ((int)a == 1 && contadorComun > 14)
                         {
                             Console.SetCursorPosition(1, 25);
